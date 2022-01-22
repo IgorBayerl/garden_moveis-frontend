@@ -5,7 +5,9 @@ const Navbar: React.FC = () => {
     <nav className="flex w-full navbar navbar-expand-lg sm:justify-between justify-center px-10 navbar-light bg-slate-100">
       <div className="flex items-center">
         <Image src={"/logo.png"} alt="logo" height={80} width={184} />
-        <h1>Garden Moveis</h1>
+        <h1 className="sm:text-2xl text-2xl mx-5 font-bold whitespace-nowrap">
+          Garden Moveis
+        </h1>
       </div>
       <div className="hidden sm:block">
         <div>

@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Card from "./Card";
+import Typography from "./Topography";
 
 const MainContent: React.FC = ({ children }) => {
   return (

@@ -1,35 +1,62 @@
-import Image from "next/image";
+import Category from "./Category";
 
-const Card: React.FC = () => {
+interface Props {
+  item: Item;
+}
+
+interface Item {
+  attributes: Attributes;
+}
+interface Attributes {
+  categories?: CategoriesData;
+  name: string;
+  price?: number;
+  pictures?: PicturesData;
+  stock?: number;
+}
+
+interface CategoriesData {
+  data: [
+    attributes?: {
+      name: string;
+    }
+  ];
+}
+interface PicturesData {
+  data: [
+    attributes: {
+      url: string;
+    }
+  ];
+}
+
+const Card: React.FC<Props> = ({ item }) => {
   return (
-    <div className="max-w-sm ">
-      <div className="max-w-sm rounded-2xl overflow-hidden shadow-lg">
-        <Image
-          src={"/logo.png"}
-          alt="logo"
-          layout="responsive"
-          height={80}
-          width={184}
+    <div className="max-w-sm py-6 break-inside-avoid">
+      <div className="max-w-sm rounded-2xl overflow-hidden shadow-lg teste-shaddow  ">
+        <img
+          className="w-full"
+          src={
+            "http://localhost:1337" +
+            item.attributes.pictures?.data[0]?.attributes.url
+          }
+          // alt="Imagem não encontrada"
+          onError={({ currentTarget }) => {
+            currentTarget.onerror = null; // prevents looping
+            currentTarget.src = "/no-image.png";
+          }}
         />
       </div>
-      <div className="px-6 py-4">
-        <div className="font-bold text-xl mb-2">Mountain</div>
-        <p className="text-gray-700 text-base">
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus
-          quia, Nonea! Maiores et perferendis eaque, exercitationem praesentium
-          nihil.
-        </p>
+      <div className="px-2 py-2 font-bold sm:text-lg text-sm ">
+        {item?.attributes?.name}
       </div>
-      <div className="px-6 pt-4 pb-2">
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-          #photography
-        </span>
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-          #travel
-        </span>
-        <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-          #winter
-        </span>
+      <div className=" pb-2">
+        {item?.attributes?.categories?.data?.map((item) => (
+          <Category>{item?.attributes.name}</Category>
+        ))}
+        <Category>Mesa</Category>
+        <Category sellected={true}>Dobravel</Category>
+        <Category>winter</Category>
       </div>
     </div>
   );
