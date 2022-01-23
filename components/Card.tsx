@@ -16,18 +16,15 @@ interface Attributes {
 }
 
 interface CategoriesData {
-  data: [
-    attributes?: {
-      name: string;
-    }
-  ];
+  data: any[];
 }
+
+interface CategoryAttributes {
+  name: string;
+}
+
 interface PicturesData {
-  data: [
-    attributes: {
-      url: string;
-    }
-  ];
+  data: any[];
 }
 
 const Card: React.FC<Props> = ({ item }) => {
