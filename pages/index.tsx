@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Navbar from "../components/NavBar";
 import BottomMenu from "../components/BottomMenu";
 import Columns from "../components/Columns";

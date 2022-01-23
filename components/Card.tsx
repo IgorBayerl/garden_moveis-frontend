@@ -1,21 +1,21 @@
 import Category from "./Category";
 
-interface Props {
-  item: Item;
+interface IProps {
+  item: IItem;
 }
 
-interface Item {
-  attributes: Attributes;
+export interface IItem {
+  attributes: IAttributes;
 }
-interface Attributes {
-  categories?: CategoriesData;
+interface IAttributes {
+  categories?: ICategoriesData;
   name: string;
   price?: number;
-  pictures?: PicturesData;
+  pictures?: IPicturesData;
   stock?: number;
 }
 
-interface CategoriesData {
+interface ICategoriesData {
   data: any[];
 }
 
@@ -23,11 +23,11 @@ interface CategoryAttributes {
   name: string;
 }
 
-interface PicturesData {
+interface IPicturesData {
   data: any[];
 }
 
-const Card: React.FC<Props> = ({ item }) => {
+const Card: React.FC<IProps> = ({ item }) => {
   return (
     <div className="max-w-sm py-6 break-inside-avoid">
       <div className="max-w-sm rounded-2xl overflow-hidden shadow-lg teste-shaddow  ">

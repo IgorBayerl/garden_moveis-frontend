@@ -1,9 +1,9 @@
 import React from "react";
-import Card from "./Card";
+import Card, { IItem } from "./Card";
 
 interface Props {
   children?: React.ReactNode;
-  items?: object[];
+  items: IItem[];
 }
 
 const Columns: React.FC<Props> = ({ items }) => {
