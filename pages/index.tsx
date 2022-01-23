@@ -6,9 +6,14 @@ import { ApolloClient, InMemoryCache } from "@apollo/client";
 import { useCallback, useEffect, useState } from "react";
 import { GET_HOME_PAGE_DATA } from "../graphql/queries";
 import Typography from "../components/Topography";
+import { IItem } from "../components/Card";
+
+interface IData {
+  data: IItem[];
+}
 
 export default function Home() {
-  const [itemsData, setItemsData] = useState({});
+  const [itemsData, setItemsData] = useState<IData>({ data: [] });
 
   const client = new ApolloClient({
     uri: "http://localhost:1337/graphql",
@@ -16,10 +21,13 @@ export default function Home() {
   });
 
   const fetchData = useCallback(async () => {
-    console.log("aaaa? " + process.env.NEXT_PUBLIC_STRAPI_GRAPHQL_API);
+    console.log(
+      `NEXT_PUBLIC_STRAPI_GRAPHQL_API: ${process.env.NEXT_PUBLIC_STRAPI_GRAPHQL_API}`
+    );
     try {
       const { data } = await client.query({ query: GET_HOME_PAGE_DATA });
       setItemsData(data?.products);
+      console.log(JSON.stringify(data?.products));
     } catch (error) {
       alert("Erro ao carregar os dados");
     }
@@ -29,7 +37,6 @@ export default function Home() {
     fetchData();
   }, []);
 
-  console.log(itemsData);
   return (
     <div className="flex flex-col items-center h-screen overflow-hidden ">
       {/* <Typography
