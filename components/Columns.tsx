@@ -1,9 +1,10 @@
 import React from "react";
-import Card, { IItem } from "./Card";
+import Card from "./Card";
+import { IProduct } from "../interfaces/data";
 
 interface Props {
   children?: React.ReactNode;
-  items: IItem[];
+  items: IProduct[];
 }
 
 const Columns: React.FC<Props> = ({ items }) => {
