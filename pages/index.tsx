@@ -26,6 +26,9 @@ export const getStaticProps = async () => {
         id
         title
         description
+        pictures {
+          url
+        }
         categories {
           title
         }
@@ -36,7 +39,7 @@ export const getStaticProps = async () => {
     }
   `;
   const data = await graphQLClient.request(query);
-  console.log(JSON.stringify(data, undefined, 2));
+  // console.log(JSON.stringify(data, undefined, 2));
   return {
     props: { data },
   };
@@ -53,7 +56,7 @@ const Home: React.FC<IProps> = ({ data }) => {
       ></Typography> */}
       <Navbar></Navbar>
       <BottomMenu></BottomMenu>
-      <p>{JSON.stringify(data)}</p>
+      {/* <p>{JSON.stringify(data)}</p> */}
       <MainContent>
         <Columns items={data.products}></Columns>
       </MainContent>

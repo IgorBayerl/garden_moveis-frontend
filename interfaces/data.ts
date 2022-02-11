@@ -4,14 +4,22 @@ export interface IData {
 }
 
 export interface IProduct {
+  id: string;
   products: IProduct[];
   title: string;
+  stock: number;
+  price: number;
   description: string;
   categories: ICategory[];
-  image?: string;
+  pictures: IPictures[];
+  relatedProducts: IProduct[];
 }
 
 export interface ICategory {
   id?: string;
   title?: string;
+}
+
+export interface IPictures {
+  url: string;
 }

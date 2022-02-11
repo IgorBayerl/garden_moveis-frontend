@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-.teste-shaddow {
-  /* -webkit-box-shadow: inset 0px 2px 23px 7px rgba(0, 0, 0, 0.32);
-  box-shadow: inset 0px 2px 23px 7px rgba(0, 0, 0, 0.32);
-  margin-top: -1rem; */
+.test-shaddow {
+  box-shadow: 0px 5px 24px 11px rgba(0, 0, 0, 0.09);
+  -webkit-box-shadow: 0px 5px 24px 11px rgba(0, 0, 0, 0.09);
+  -moz-box-shadow: 0px 5px 24px 11px rgba(0, 0, 0, 0.09);
 }
