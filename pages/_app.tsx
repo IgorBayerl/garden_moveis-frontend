@@ -9,7 +9,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         {/* <link rel="icon" href="/images/favicon.png" /> */}
         {/* <meta name="google-site-verification" content="rL0WQyAInIZEBhPV5C40ssChKzgnRDx3heD93UtoJfs" /> */}
         <title>Garden Moveis</title>
-        <meta name="description" content="" />
+        <meta name="description" content="fabrica de moveis de madeira" />
         <meta
           name="keywords"
           content="Garden, Wood, Moveis, Furniture, Madeira"
