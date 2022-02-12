@@ -9,21 +9,33 @@
 }
 
 @layer utilities {
-  @variants responsive {
-    .masonry {
-      column-gap: 1.5em;
-      column-count: 2;
-    }
-    .masonry-sm {
-      column-gap: 1.5em;
-      column-count: 2;
-    }
-    .masonry-md {
-      column-gap: 1.5em;
-      column-count: 3;
-    }
-    .break-inside {
-      break-inside: avoid;
-    }
+  .masonry {
+    height: fit-content;
+  }
+  .masonry-sm {
+    column-gap: 1.5em;
+    column-count: 2;
+  }
+  .masonry-md {
+    column-gap: 1.5em;
+    column-count: 3;
+  }
+  .break-inside {
+    break-inside: avoid;
+  }
+  .horizontalScroll {
+    overflow-x: scroll;
+    display: flex;
+    behavior: smooth;
+  }
+  .horizontalScroll::-webkit-scrollbar {
+    display: none;
+  }
+
+  .bottom-menu {
+    transition: all 0.2s ease-in-out;
+  }
+  .hide-bottom-menu {
+    transform: translateY(100vh);
   }
 }

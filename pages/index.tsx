@@ -8,6 +8,7 @@ import { useCallback, useEffect, useState } from "react";
 import Typography from "../components/Topography";
 import { gql, GraphQLClient } from "graphql-request";
 import { IProduct } from "../interfaces/data";
+import TagsList from "./../components/TagsList";
 
 interface IProps {
   data: IProduct;
@@ -39,7 +40,6 @@ export const getStaticProps = async () => {
     }
   `;
   const data = await graphQLClient.request(query);
-  // console.log(JSON.stringify(data, undefined, 2));
   return {
     props: { data },
   };
@@ -47,7 +47,7 @@ export const getStaticProps = async () => {
 
 const Home: React.FC<IProps> = ({ data }) => {
   // const [itemsData, setItemsData] = useState<IData>({ data: [] });
-
+  const [scrollDirection, setScrollDirection] = useState<number>(0);
   return (
     <div className="flex flex-col items-center h-screen overflow-hidden ">
       {/* <Typography
@@ -55,9 +55,10 @@ const Home: React.FC<IProps> = ({ data }) => {
         height="500"
       ></Typography> */}
       <Navbar></Navbar>
-      <BottomMenu></BottomMenu>
+      <BottomMenu scrollDirection={scrollDirection}></BottomMenu>
       {/* <p>{JSON.stringify(data)}</p> */}
-      <MainContent>
+      <TagsList scrollDirection={scrollDirection}></TagsList>
+      <MainContent setScrollDirection={setScrollDirection}>
         <Columns items={data.products}></Columns>
       </MainContent>
 

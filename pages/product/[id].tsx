@@ -78,7 +78,7 @@ const Product: React.FC<IProps> = ({ data }) => {
   return (
     <div className="flex flex-col items-center h-screen overflow-hidden ">
       <Navbar></Navbar>
-      <BottomMenu></BottomMenu>
+      <BottomMenu scrollDirection={0}></BottomMenu>
       <h1>Product page</h1>
       <p>{data.product.title}</p>
       <p>{data.product.description}</p>

@@ -8,7 +8,7 @@ interface IProps {
 
 const Card: React.FC<IProps> = ({ item }) => {
   return (
-    <div className="max-w-sm py-2 break-inside-avoid">
+    <div className="hover-shadow max-w-sm py-2 break-inside-avoid">
       <Link href={`/product/${item.id}`}>
         <a>
           <div className="cursor-pointer max-w-sm rounded-2xl overflow-hidden test-shaddow shadow-lg   ">
