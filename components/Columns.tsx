@@ -15,6 +15,11 @@ const Columns: React.FC<Props> = ({ items }) => {
         <Card key={item.id} item={item}></Card>
       ))}
     </div>
+    // <div className="columns-2 display-flex  bg-slate-500">
+    //   {items?.map((item) => (
+    //     <Card key={item.id} item={item}></Card>
+    //   ))}
+    // </div>
   );
 };
 

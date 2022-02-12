@@ -8,14 +8,14 @@ interface IProps {
 
 const Card: React.FC<IProps> = ({ item }) => {
   return (
-    <div className="max-w-sm py-6 break-inside-avoid">
+    <div className="max-w-sm py-2 break-inside-avoid">
       <Link href={`/product/${item.id}`}>
         <a>
           <div className="cursor-pointer max-w-sm rounded-2xl overflow-hidden test-shaddow shadow-lg   ">
             <img
               className="w-full "
               src={item.pictures[0].url}
-              // alt="Imagem não encontrada"
+              alt={`Imagem do produto: ${item.title}`}
               onError={({ currentTarget }) => {
                 currentTarget.onerror = null; // prevents looping
                 currentTarget.src = "/no-image.png";
@@ -29,7 +29,7 @@ const Card: React.FC<IProps> = ({ item }) => {
       </div>
       <div className=" pb-2">
         {item?.categories?.map((item: ICategory) => (
-          <Category>{item.title}</Category>
+          <Category key={item.title}>{item.title}</Category>
         ))}
       </div>
     </div>
