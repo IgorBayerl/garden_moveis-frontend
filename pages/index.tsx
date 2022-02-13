@@ -10,6 +10,8 @@ import { gql, GraphQLClient } from "graphql-request";
 import { IProduct } from "../interfaces/data";
 import TagsList from "./../components/TagsList";
 
+import { SelectedTagsContext } from "../components/Context";
+
 interface IProps {
   data: IProduct;
 }
@@ -48,26 +50,24 @@ export const getStaticProps = async () => {
 const Home: React.FC<IProps> = ({ data }) => {
   // const [itemsData, setItemsData] = useState<IData>({ data: [] });
   const [scrollDirection, setScrollDirection] = useState<number>(0);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   return (
-    <div className="flex flex-col items-center h-screen overflow-hidden ">
-      {/* <Typography
-        className="opacity-10 absolute -z-10 "
-        height="500"
-      ></Typography> */}
-      <Navbar></Navbar>
-      <BottomMenu scrollDirection={scrollDirection}></BottomMenu>
-      {/* <p>{JSON.stringify(data)}</p> */}
-      <TagsList scrollDirection={scrollDirection}></TagsList>
-      <MainContent setScrollDirection={setScrollDirection}>
-        <Columns items={data.products}></Columns>
-      </MainContent>
+    <SelectedTagsContext.Provider value={{ selectedTags, setSelectedTags }}>
+      <div className="flex flex-col items-center h-screen overflow-hidden ">
+        <Navbar></Navbar>
+        <BottomMenu scrollDirection={scrollDirection}></BottomMenu>
+        <TagsList scrollDirection={scrollDirection}></TagsList>
+        <MainContent setScrollDirection={setScrollDirection}>
+          <Columns items={data.products}></Columns>
+        </MainContent>
 
-      {/* TopBar/NavBar */}
-      {/* tags list */}
-      {/* Main content */}
-      {/* tagsList */}
-      {/* menu */}
-    </div>
+        {/* TopBar/NavBar */}
+        {/* tags list */}
+        {/* Main content */}
+        {/* tagsList */}
+        {/* menu */}
+      </div>
+    </SelectedTagsContext.Provider>
   );
 };
 

@@ -3,6 +3,13 @@ import BottomMenu from "../../components/BottomMenu";
 import Navbar from "../../components/NavBar";
 import { IProduct } from "../../interfaces/data";
 // import { getStaticProps } from "./../index";
+import Category from "./../../components/Category";
+import Card from "./../../components/Card";
+import Content from "../../components/Content";
+import ProductInformation from "../../components/ProductInformation";
+import Left from "../../components/Left";
+import Right from "../../components/Right";
+import RelatedProducts from "../../components/RelatedProducts";
 
 export const getStaticPaths = async () => {
   const url = `${process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT}`;
@@ -44,6 +51,10 @@ export const getStaticProps = async (context: any) => {
         description
         price
         stock
+        pictures {
+          id
+          url
+        }
         categories {
           title
         }
@@ -76,16 +87,42 @@ interface IData {
 
 const Product: React.FC<IProps> = ({ data }) => {
   return (
-    <div className="flex flex-col items-center h-screen overflow-hidden ">
+    <div className="flex flex-col items-center h-screen ">
       <Navbar></Navbar>
       <BottomMenu scrollDirection={0}></BottomMenu>
-      <h1>Product page</h1>
+      <Content>
+        <ProductInformation>
+          <Left>
+            <img src="https://media.graphcms.com/Pj88EguR1CT7SwbjFMWT" alt="" />
+            {/* <ProductImages></ProductImages> */}
+          </Left>
+          <Right>
+            <h1>{data.product.title}</h1>
+            <p>{data.product.description}</p>
+            <p>{data.product.price}</p>
+            <p>{data.product.stock}</p>
+            <div className=" pb-2">
+              {data.product.categories.map((category: any) => (
+                <Category>{category.title}</Category>
+              ))}
+            </div>
+          </Right>
+        </ProductInformation>
+        <RelatedProducts>
+          {data.product.relatedProducts?.map((item) => (
+            <Card key={item.id} item={item}></Card>
+          ))}
+        </RelatedProducts>
+      </Content>
+      {/* <h1>Product page</h1>
       <p>{data.product.title}</p>
       <p>{data.product.description}</p>
       <p>{data.product.price}</p>
       <p>{data.product.stock}</p>
+
+      <p>{JSON.stringify(data.product.pictures)}</p>
       <p>{JSON.stringify(data.product.categories)}</p>
-      <p>{JSON.stringify(data.product.relatedProducts)}</p>
+      <p>{JSON.stringify(data.product.relatedProducts)}</p> */}
     </div>
   );
 };

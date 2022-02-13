@@ -16,10 +16,11 @@ export interface IProduct {
 }
 
 export interface ICategory {
-  id?: string;
-  title?: string;
+  id: string;
+  title: string;
 }
 
 export interface IPictures {
+  id: string;
   url: string;
 }
