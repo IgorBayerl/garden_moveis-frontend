@@ -101,11 +101,6 @@ const Product: React.FC<IProps> = ({ data }) => {
             <p>{data.product.description}</p>
             <p>{data.product.price}</p>
             <p>{data.product.stock}</p>
-            <div className=" pb-2">
-              {data.product.categories.map((category: any) => (
-                <Category>{category.title}</Category>
-              ))}
-            </div>
           </Right>
         </ProductInformation>
         <RelatedProducts>
