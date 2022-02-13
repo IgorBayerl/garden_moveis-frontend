@@ -7,7 +7,7 @@ interface Props {
 }
 
 const Category: React.FC<Props> = ({ children, sellected = false }) => {
-  const { selectedTags, setSelectedTags } = useContext(SelectedTagsContext);
+  const { setSelectedTags } = useContext(SelectedTagsContext);
   const onClickHandler = (tag: string) => {
     setSelectedTags(tag);
     console.log(`clicked ${tag}`);
