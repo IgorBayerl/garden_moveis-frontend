@@ -1,4 +1,9 @@
-const Content: React.FC = ({ children }) => {
-  return <div>{children}</div>;
+interface IProps {
+  children: React.ReactNode;
+}
+
+const Content: React.FC<IProps> = ({ children }) => {
+  return <div className="">{children}</div>;
 };
+
 export default Content;

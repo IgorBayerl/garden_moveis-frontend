@@ -7,7 +7,7 @@ interface IProps {
 }
 const BottomMenu: React.FC<IProps> = ({ scrollDirection }) => {
   const [visibleClass, setVisibleClass] = useState<string>("");
-  useLayoutEffect(() => {
+  useEffect(() => {
     setVisibleClass(scrollDirection === 0 ? "" : "hide-bottom-menu");
   }, [scrollDirection]);
   return (

@@ -93,7 +93,7 @@ const Product: React.FC<IProps> = ({ data }) => {
       <Content>
         <ProductInformation>
           <Left>
-            <img src="https://media.graphcms.com/Pj88EguR1CT7SwbjFMWT" alt="" />
+            <img src={data.product.pictures[0].url} alt="" />
             {/* <ProductImages></ProductImages> */}
           </Left>
           <Right>

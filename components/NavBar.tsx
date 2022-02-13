@@ -6,8 +6,8 @@ import { SelectedTagsContext } from "./Context";
 const Navbar: React.FC = () => {
   const { selectedTags, setSelectedTags } = useContext(SelectedTagsContext);
   return (
-    <nav className="flex w-full navbar navbar-expand-lg sm:justify-between justify-center px-10 navbar-light bg-slate-100">
-      <div className="flex items-center">
+    <nav className="flex w-full max-w-[1400px] navbar navbar-expand-lg sm:justify-between justify-center px-10 navbar-light ">
+      <div className="flex items-center ">
         <Link href="/">
           <a>
             <Image src={"/logo.png"} alt="logo" height={80} width={184} />

@@ -3,9 +3,8 @@ import BottomMenu from "../components/BottomMenu";
 import Columns from "../components/Columns";
 import MainContent from "../components/MainContent";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 // import { GET_HOME_PAGE_DATA } from "../graphql/queries";
-import Typography from "../components/Topography";
 import { gql, GraphQLClient } from "graphql-request";
 import { IProduct } from "../interfaces/data";
 import TagsList from "./../components/TagsList";
@@ -48,24 +47,45 @@ export const getStaticProps = async () => {
 };
 
 const Home: React.FC<IProps> = ({ data }) => {
-  // const [itemsData, setItemsData] = useState<IData>({ data: [] });
+  const [lastScrollPosition, setLastScrollPosition] = useState(0);
+  const [offset, setOffset] = useState(0);
   const [scrollDirection, setScrollDirection] = useState<number>(0);
+
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (offset > lastScrollPosition) {
+      // quando no ios existe um efeito de mola ao chegar no topo da pagina, isso evita que o menu feche com esse efeito
+      if (offset > lastScrollPosition + 100) {
+        setScrollDirection(1);
+        setLastScrollPosition(offset);
+      }
+    } else {
+      setScrollDirection(0);
+      setLastScrollPosition(offset);
+    }
+  }, [offset]);
+
+  useEffect(() => {
+    const onScroll = () => setOffset(window.pageYOffset);
+    // clean up code
+    window.removeEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
     <SelectedTagsContext.Provider value={{ selectedTags, setSelectedTags }}>
-      <div className="flex flex-col items-center h-screen overflow-hidden ">
+      <div className="flex flex-col items-center ">
         <Navbar></Navbar>
         <BottomMenu scrollDirection={scrollDirection}></BottomMenu>
         <TagsList scrollDirection={scrollDirection}></TagsList>
-        <MainContent setScrollDirection={setScrollDirection}>
+        {/* <MainContent setScrollDirection={setScrollDirection}> */}
+        <MainContent>
           <Columns items={data.products}></Columns>
         </MainContent>
 
-        {/* TopBar/NavBar */}
-        {/* tags list */}
-        {/* Main content */}
-        {/* tagsList */}
-        {/* menu */}
+        {/* footer */}
       </div>
     </SelectedTagsContext.Provider>
   );
