@@ -6,10 +6,11 @@ import MainContent from "../components/MainContent";
 import { useCallback, useEffect, useRef, useState } from "react";
 // import { GET_HOME_PAGE_DATA } from "../graphql/queries";
 import { gql, GraphQLClient } from "graphql-request";
-import { IProduct } from "../interfaces/data";
+import { IData, IProduct } from "../interfaces/data";
 import TagsList from "./../components/TagsList";
 
-import { SelectedTagsContext } from "../components/Context";
+import { GlobalDataContext } from "../components/Context";
+import { ICategory } from "./../interfaces/data";
 
 interface IProps {
   data: IProduct;
@@ -32,10 +33,12 @@ export const getStaticProps = async () => {
           url
         }
         categories {
+          id
           title
         }
       }
       categories {
+        id
         title
       }
     }
@@ -51,7 +54,33 @@ const Home: React.FC<IProps> = ({ data }) => {
   const [offset, setOffset] = useState(0);
   const [scrollDirection, setScrollDirection] = useState<number>(0);
 
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  /* Manage global data */
+  const [globalCategoriesData, setGlobalCategoriesData] = useState<ICategory[]>(
+    data.categories
+  );
+
+  const addSelectedToGlobalCategoryData = useCallback(() => {
+    const newArr = globalCategoriesData.map((obj) => ({
+      ...obj,
+      selected: false,
+    }));
+    setGlobalCategoriesData(newArr);
+  }, []);
+
+  const toggleCategoryFilter = useCallback((id: any) => {
+    const newArr = globalCategoriesData.map((obj) => {
+      if (obj.id === id) {
+        let newObj = obj;
+        newObj.selected = !obj.selected;
+        return newObj;
+      }
+      return obj;
+    });
+
+    setGlobalCategoriesData(newArr);
+  }, []);
+
+  /* End of manage global data */
 
   useEffect(() => {
     if (offset > lastScrollPosition) {
@@ -67,6 +96,7 @@ const Home: React.FC<IProps> = ({ data }) => {
   }, [offset]);
 
   useEffect(() => {
+    addSelectedToGlobalCategoryData();
     const onScroll = () => setOffset(window.pageYOffset);
     // clean up code
     window.removeEventListener("scroll", onScroll);
@@ -75,7 +105,9 @@ const Home: React.FC<IProps> = ({ data }) => {
   }, []);
 
   return (
-    <SelectedTagsContext.Provider value={{ selectedTags, setSelectedTags }}>
+    <GlobalDataContext.Provider
+      value={{ globalCategoriesData, toggleCategoryFilter }}
+    >
       <div className="flex flex-col items-center ">
         <Navbar></Navbar>
         <BottomMenu scrollDirection={scrollDirection}></BottomMenu>
@@ -87,7 +119,7 @@ const Home: React.FC<IProps> = ({ data }) => {
 
         {/* footer */}
       </div>
-    </SelectedTagsContext.Provider>
+    </GlobalDataContext.Provider>
   );
 };
 

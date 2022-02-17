@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useContext } from "react";
-import { SelectedTagsContext } from "./Context";
+import { GlobalDataContext } from "./Context";
 
 const Navbar: React.FC = () => {
-  const { selectedTags, setSelectedTags } = useContext(SelectedTagsContext);
+  const { globalCategoriesData } = useContext(GlobalDataContext);
   return (
     <nav className="flex w-full max-w-[1400px] navbar navbar-expand-lg sm:justify-between justify-center px-10 navbar-light ">
       <div className="flex items-center ">
@@ -14,7 +14,7 @@ const Navbar: React.FC = () => {
           </a>
         </Link>
         <h1 className="sm:text-2xl text-2xl mx-5 font-bold whitespace-nowrap">
-          Garden Moveis {selectedTags}
+          Garden Moveis
         </h1>
       </div>
       <div className="hidden sm:block">

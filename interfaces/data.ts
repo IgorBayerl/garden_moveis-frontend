@@ -1,6 +1,6 @@
 export interface IData {
-  products?: IProduct[];
-  categories?: ICategory[];
+  products: IProduct[];
+  categories: ICategory[];
 }
 
 export interface IProduct {
@@ -18,6 +18,7 @@ export interface IProduct {
 export interface ICategory {
   id: string;
   title: string;
+  selected?: boolean;
 }
 
 export interface IPictures {

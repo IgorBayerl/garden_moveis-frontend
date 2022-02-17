@@ -1,3 +1,4 @@
 import { createContext } from "react";
+import { IData } from "./../interfaces/data";
 
-export const SelectedTagsContext = createContext<any>({});
+export const GlobalDataContext = createContext<any>({});

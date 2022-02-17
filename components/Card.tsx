@@ -10,6 +10,11 @@ const Card: React.FC<IProps> = ({ item }) => {
   const handleClick = (id: string) => {
     console.log(id);
   };
+
+  const verifyCategorySelected = (category: ICategory) => {
+    return category.selected;
+  };
+
   return (
     <div className="hover-shadow max-w-sm py-2 break-inside-avoid">
       <Link href={`/product/${item.id}`}>
@@ -32,11 +37,7 @@ const Card: React.FC<IProps> = ({ item }) => {
       </div>
       <div className=" pb-2">
         {item?.categories?.map((item: ICategory) => (
-          <Category
-            onClickFunction={handleClick}
-            key={item.id}
-            itemId={item.id}
-          >
+          <Category key={item.id} itemId={item.id}>
             {item.title}
           </Category>
         ))}
