@@ -13,13 +13,13 @@ const BottomMenu: React.FC<IProps> = ({ scrollDirection }) => {
 
   return (
     <nav
-      className={`${visibleClass} bottom-menu flex sm:hidden mx-10 z-50 shadow-md my-10 h-16 justify-evenly bg-white rounded-full fixed bottom-0 `}
+      className={`${visibleClass} bottom-menu flex sm:hidden  z-50 shadow-md my-4 h-16 justify-evenly bg-white rounded-full fixed bottom-0 `}
     >
       <div className="flex items-center">
-        <ChatIcon className="cursor-pointer  h-12 w-12 p-2 m-6 text-gray-500" />
+        <SearchIcon className="cursor-pointer h-12 w-12 p-2 m-6 text-gray-500" />
       </div>
       <div className="flex items-center">
-        <SearchIcon className="cursor-pointer h-12 w-12 p-2 m-6 text-gray-500" />
+        <ChatIcon className="cursor-pointer  h-12 w-12 p-2 m-6 text-gray-500" />
       </div>
     </nav>
   );

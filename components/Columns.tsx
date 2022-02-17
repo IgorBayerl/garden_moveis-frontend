@@ -15,10 +15,7 @@ const Columns: React.FC<Props> = ({ items }) => {
     //     <Card key={item.id} item={item}></Card>
     //   ))}
     // </div>
-    <div
-      className="columns-2 sm:columns-3 px-3 sm:px-5 lg:columns-5  w-[1400px] mx-auto space-y-3 
-     h-fit "
-    >
+    <div className="columns-2 sm:columns-3 px-2 sm:px-5 lg:columns-5  w-[1400px] mx-auto space-y-2 h-fit ">
       {items?.map((item) => (
         <Card key={item.id} item={item}></Card>
       ))}

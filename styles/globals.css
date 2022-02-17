@@ -33,9 +33,11 @@
   }
 
   .bottom-menu {
-    transition: all 0.2s ease-in-out;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0px -5px 24px 11px rgba(0, 0, 0, 0.09);
   }
   .hide-bottom-menu {
-    transform: translateY(100vh);
+    transform: translateY(200%);
+    opacity: 0;
   }
 }
