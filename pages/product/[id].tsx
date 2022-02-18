@@ -103,11 +103,6 @@ const Product: React.FC<IProps> = ({ data }) => {
             <p>{data.product.stock}</p>
           </Right>
         </ProductInformation>
-        <RelatedProducts>
-          {data.product.relatedProducts?.map((item) => (
-            <Card key={item.id} item={item}></Card>
-          ))}
-        </RelatedProducts>
       </Content>
       {/* <h1>Product page</h1>
       <p>{data.product.title}</p>
