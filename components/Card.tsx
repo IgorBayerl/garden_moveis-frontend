@@ -1,19 +1,19 @@
 import Category from "./Category";
 import { IProduct, ICategory } from "../interfaces/data";
 import Link from "next/link";
-
+import { useCallback, useContext, useEffect, useState } from "react";
+import { GlobalDataContext } from "./Context";
 interface IProps {
   item: IProduct;
 }
 
 const Card: React.FC<IProps> = ({ item }) => {
-  const handleClick = (id: string) => {
-    console.log(id);
-  };
+  const { globalCategoriesData } = useContext(GlobalDataContext);
 
-  const verifyCategorySelected = (category: ICategory) => {
-    return category.selected;
-  };
+  const isSelected = useCallback((id: string) => {
+    return globalCategoriesData.find((item: ICategory) => item.id === id)
+      .selected;
+  }, []);
 
   return (
     <div className="hover-shadow max-w-sm py-2 break-inside-avoid">
@@ -37,7 +37,11 @@ const Card: React.FC<IProps> = ({ item }) => {
       </div>
       <div className=" pb-2">
         {item?.categories?.map((item: ICategory) => (
-          <Category key={item.id} itemId={item.id}>
+          <Category
+            key={item.id}
+            itemId={item.id}
+            sellected={isSelected(item.id)}
+          >
             {item.title}
           </Category>
         ))}
