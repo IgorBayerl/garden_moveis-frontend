@@ -12,7 +12,6 @@ const Category: React.FC<Props> = ({ children, sellected = false, itemId }) => {
   const { toggleCategoryFilter } = useContext(GlobalDataContext);
   const onClickHandler = (tag: string) => {
     toggleCategoryFilter(tag);
-    console.log(`clicked ${tag}`);
   };
 
   if (sellected) {

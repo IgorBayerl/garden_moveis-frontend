@@ -25,25 +25,33 @@ export const getStaticProps = async () => {
   });
   const query = gql`
     {
-      products(where: { categories_some: { title_in: ["Mesa", "Banqueta"] } }) {
-        id
-        title
-        description
-        pictures {
-          url
+      productsOrders {
+        products {
+          id
+          title
+          description
+          pictures {
+            url
+          }
+          categories {
+            id
+            title
+          }
         }
+      }
+      categoryOrders {
         categories {
           id
           title
         }
       }
-      categories {
-        id
-        title
-      }
     }
   `;
-  const data = await graphQLClient.request(query);
+  const rawData = await graphQLClient.request(query);
+  const data = {
+    products: rawData.productsOrders[0].products,
+    categories: rawData.categoryOrders[0].categories,
+  };
   return {
     props: { data },
   };
