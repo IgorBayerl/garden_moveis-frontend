@@ -11,6 +11,7 @@ import TagsList from "./../components/TagsList";
 
 import { GlobalDataContext } from "../components/Context";
 import { ICategory } from "./../interfaces/data";
+import Category from "./../components/Category";
 
 interface IProps {
   data: IProduct;
@@ -58,6 +59,7 @@ export const getStaticProps = async () => {
 };
 
 const Home: React.FC<IProps> = ({ data }) => {
+  const [productsData, setProductsData] = useState<IProduct[]>(data.products);
   const [lastScrollPosition, setLastScrollPosition] = useState(0);
   const [offset, setOffset] = useState(0);
   const [scrollDirection, setScrollDirection] = useState<number>(0);
@@ -66,6 +68,82 @@ const Home: React.FC<IProps> = ({ data }) => {
   const [globalCategoriesData, setGlobalCategoriesData] = useState<ICategory[]>(
     data.categories
   );
+
+  useEffect(() => {
+    // fetch new data from api
+    fetchData();
+  }, [globalCategoriesData]);
+
+  const fetchData = async () => {
+    try {
+      const url = `${process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT}`;
+      const graphQLClient = new GraphQLClient(url, {
+        headers: {
+          Authorization: `Bearer ${process.env.NEXT_PUBLIC_GRAPHCMS_API_KEY}`,
+        },
+      });
+
+      const queryArr = globalCategoriesData
+        .filter((category) => category.selected)
+        .map((category: ICategory) => category.title);
+
+      let query = gql``;
+      console.log(queryArr);
+      if (queryArr.length > 0) {
+        query = gql`
+        {
+          productsOrders {
+            products(where: { categories_some: { title_in: ${JSON.stringify(
+              queryArr
+            )} } }) {
+              id
+              title
+              description
+              pictures {
+                url
+              }
+              categories {
+                id
+                title
+              }
+            }
+          }
+        }
+        `;
+      } else {
+        query = gql`
+          {
+            productsOrders {
+              products {
+                id
+                title
+                description
+                pictures {
+                  url
+                }
+                categories {
+                  id
+                  title
+                }
+              }
+            }
+            categoryOrders {
+              categories {
+                id
+                title
+              }
+            }
+          }
+        `;
+      }
+
+      console.log(query);
+      const rawData = await graphQLClient.request(query);
+      setProductsData(rawData.productsOrders[0].products);
+    } catch (error) {
+      alert(error);
+    }
+  };
 
   const addSelectedToGlobalCategoryData = useCallback(() => {
     const newArr = globalCategoriesData.map((obj) => ({
@@ -122,7 +200,7 @@ const Home: React.FC<IProps> = ({ data }) => {
         <TagsList scrollDirection={scrollDirection}></TagsList>
         {/* <MainContent setScrollDirection={setScrollDirection}> */}
         <MainContent>
-          <Columns items={data.products}></Columns>
+          <Columns items={productsData}></Columns>
         </MainContent>
 
         {/* footer */}
