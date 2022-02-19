@@ -3,7 +3,7 @@ interface IProps {
 }
 
 const Content: React.FC<IProps> = ({ children }) => {
-  return <div className="">{children}</div>;
+  return <div className="w-full">{children}</div>;
 };
 
 export default Content;
