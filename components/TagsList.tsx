@@ -47,11 +47,11 @@ const TagsList: React.FC<IProps> = ({ scrollDirection }) => {
   // };
 
   return (
-    <nav className="pt-2 flex w-full max-w-[1400px] justify-center  ">
+    <nav className="pt-2 flex w-full max-w-[1400px] justify-center sticky-top bg-white  ">
       <div
         ref={refContainer}
         // onWheel={(e) => horizontalScrollWheel(e)}
-        className="horizontalScroll  "
+        className="horizontalScroll sm:hideScroll "
       >
         {globalCategoriesData.map((category: ICategory) => (
           <Category

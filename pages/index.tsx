@@ -12,6 +12,7 @@ import TagsList from "./../components/TagsList";
 import { GlobalDataContext } from "../components/Context";
 import { ICategory } from "./../interfaces/data";
 import Category from "./../components/Category";
+import Masonry from "../components/Masonry";
 
 interface IProps {
   data: IProduct;
@@ -88,7 +89,7 @@ const Home: React.FC<IProps> = ({ data }) => {
         .map((category: ICategory) => category.title);
 
       let query = gql``;
-      console.log(queryArr);
+      // console.log(queryArr);
       if (queryArr.length > 0) {
         query = gql`
         {
@@ -137,7 +138,7 @@ const Home: React.FC<IProps> = ({ data }) => {
         `;
       }
 
-      console.log(query);
+      // console.log(query);
       const rawData = await graphQLClient.request(query);
       setProductsData(rawData.productsOrders[0].products);
     } catch (error) {
@@ -200,7 +201,7 @@ const Home: React.FC<IProps> = ({ data }) => {
         <TagsList scrollDirection={scrollDirection}></TagsList>
         {/* <MainContent setScrollDirection={setScrollDirection}> */}
         <MainContent>
-          <Columns items={productsData}></Columns>
+          <Masonry items={productsData}></Masonry>
         </MainContent>
 
         {/* footer */}

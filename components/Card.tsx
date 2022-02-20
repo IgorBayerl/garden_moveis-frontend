@@ -16,12 +16,12 @@ const Card: React.FC<IProps> = ({ item }) => {
   }, []);
 
   return (
-    <div className="hover-shadow max-w-sm py-2 break-inside-avoid">
+    <div className=" max-w-sm py-2 break-inside-avoid masonry-content">
       <Link href={`/product/${item.id}`}>
         <a>
-          <div className="cursor-pointer max-w-sm rounded-2xl overflow-hidden test-shaddow shadow-lg   ">
+          <div className="cursor-pointer max-w-sm rounded-2xl overflow-hidden ">
             <img
-              className="w-full "
+              className="w-full img-card"
               src={item.pictures[0].url}
               alt={`Imagem do produto: ${item.title}`}
               onError={({ currentTarget }) => {

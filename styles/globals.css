@@ -2,24 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
-.test-shaddow {
-  box-shadow: 0px 5px 24px 11px rgba(0, 0, 0, 0.09);
-  -webkit-box-shadow: 0px 5px 24px 11px rgba(0, 0, 0, 0.09);
-  -moz-box-shadow: 0px 5px 24px 11px rgba(0, 0, 0, 0.09);
-}
-
 @layer utilities {
-  .masonry {
-    height: fit-content;
+  .test-shaddow {
+    box-shadow: 0px 5px 24px 11px rgba(0, 0, 0, 0.09);
+    -webkit-box-shadow: 0px 5px 24px 11px rgba(0, 0, 0, 0.09);
+    -moz-box-shadow: 0px 5px 24px 11px rgba(0, 0, 0, 0.09);
   }
-  .masonry-sm {
-    column-gap: 1.5em;
-    column-count: 2;
-  }
-  .masonry-md {
-    column-gap: 1.5em;
-    column-count: 3;
-  }
+
   .break-inside {
     break-inside: avoid;
   }
@@ -27,8 +16,12 @@
     overflow-x: scroll;
     display: flex;
     behavior: smooth;
+    min-width: 100%;
   }
   .horizontalScroll::-webkit-scrollbar {
+    /* display: none; */
+  }
+  .hideScroll::-webkit-scrollbar {
     display: none;
   }
 
@@ -63,5 +56,64 @@
     max-width: 100%;
     height: 100%;
     width: auto;
+  }
+
+  .sticky-top {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+  }
+  /* masonry */
+
+  .masonryContainer {
+    counter-reset: masonry;
+  }
+  .masonry {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: repeat(auto-fill, minmax(40vw, 1fr));
+    grid-auto-rows: 0;
+    width: 98vw;
+    max-width: 1400px;
+  }
+  .masonry-sm {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+  .masonry-lg {
+    grid-template-columns: repeat(auto-fill, minmax(19%, 1fr));
+  }
+
+  .masonry-item {
+    /* background-color: #eee; */
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .masonry-item,
+  .masonry-item img {
+    position: relative;
+  }
+  /* .masonry-item:after {
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0);
+    content: counter(masonry);
+    counter-increment: masonry;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.1s ease-in;
+  } */
+  /* .masonry-item:hover:after {
+    font-size: 30px;
+    
+  } */
+  /* masonry fim */
+  .img-card {
+    filter: brightness(95%);
   }
 }
