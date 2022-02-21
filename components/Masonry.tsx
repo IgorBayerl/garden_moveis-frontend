@@ -51,9 +51,10 @@ const Masonry: React.FC<Props> = ({ items }) => {
   };
 
   useEffect(() => {
-    resizeAllMasonryItems();
     // resizeAllMasonryItems();
-  }, [globalCategoriesData]);
+    waitForImages();
+    // resizeAllMasonryItems();
+  }, [items]);
 
   const waitForImages = () => {
     const allItems = document.querySelectorAll(".masonry-item");
