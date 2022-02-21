@@ -21,7 +21,7 @@ const Card: React.FC<IProps> = ({ item }) => {
         <a>
           <div className="cursor-pointer max-w-sm rounded-2xl overflow-hidden ">
             <img
-              className="w-full img-card"
+              className="w-full img-card sm:img-card-hover"
               src={item.pictures[0].url}
               alt={`Imagem do produto: ${item.title}`}
               onError={({ currentTarget }) => {
