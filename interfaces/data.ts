@@ -11,8 +11,13 @@ export interface IProduct {
   price: number;
   description: string;
   categories: ICategory[];
+  colection: IColection;
   pictures: IPictures[];
   relatedProducts: IProduct[];
+}
+
+export interface IColection {
+  products: IProduct[];
 }
 
 export interface ICategory {

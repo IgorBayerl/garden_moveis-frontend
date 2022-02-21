@@ -18,9 +18,7 @@ const Navbar: React.FC = () => {
         </h1>
       </div>
       <div className="hidden sm:block">
-        <div>
-          <h1>Contato</h1>
-        </div>
+        <div>{/* <h1>Contato</h1> */}</div>
       </div>
     </nav>
   );

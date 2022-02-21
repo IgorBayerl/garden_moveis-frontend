@@ -1,8 +1,7 @@
-import React, { useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 import Card from "./Card";
 import { IProduct } from "../interfaces/data";
 import imagesLoaded from "imagesloaded";
-import { GlobalDataContext } from "./Context";
 
 interface Props {
   children?: React.ReactNode;
@@ -10,7 +9,6 @@ interface Props {
 }
 
 const Masonry: React.FC<Props> = ({ items }) => {
-  const { globalCategoriesData } = useContext(GlobalDataContext);
   const resizeMasonryItem = (item: any) => {
     const grid = document.getElementsByClassName("masonry")[0];
     const rowGap =
@@ -29,8 +27,6 @@ const Masonry: React.FC<Props> = ({ items }) => {
           (rowHeight + rowGap)
       );
       item.style.gridRowEnd = "span " + rowSpan;
-      /* Make the images take all the available space in the cell/item */
-      // masonryContent.style.height = rowSpan * 10 + "px";
     }
   };
 
@@ -51,9 +47,7 @@ const Masonry: React.FC<Props> = ({ items }) => {
   };
 
   useEffect(() => {
-    // resizeAllMasonryItems();
     waitForImages();
-    // resizeAllMasonryItems();
   }, [items]);
 
   const waitForImages = () => {
@@ -86,25 +80,6 @@ const Masonry: React.FC<Props> = ({ items }) => {
       </div>
     </div>
   );
-  // return (
-  //   <div className=" flex masonryContainer justify-center man">
-  //     <div className="masonry sm:masonry-sm lg:masonry-lg">
-  //       {items?.map((item) => (
-  //         <div className="masonry-item">
-  //           <img
-  //             className="masonry-content"
-  //             src={item.pictures[0].url}
-  //             alt={`Imagem do produto: ${item.title}`}
-  //             onError={({ currentTarget }) => {
-  //               currentTarget.onerror = null; // prevents looping
-  //               currentTarget.src = "/no-image.png";
-  //             }}
-  //           />
-  //         </div>
-  //       ))}
-  //     </div>
-  //   </div>
-  // );
 };
 
 export default Masonry;

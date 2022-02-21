@@ -199,12 +199,9 @@ const Home: React.FC<IProps> = ({ data }) => {
         <Navbar></Navbar>
         <BottomMenu scrollDirection={scrollDirection}></BottomMenu>
         <TagsList scrollDirection={scrollDirection}></TagsList>
-        {/* <MainContent setScrollDirection={setScrollDirection}> */}
         <MainContent>
           <Masonry items={productsData}></Masonry>
         </MainContent>
-
-        {/* footer */}
       </div>
     </GlobalDataContext.Provider>
   );

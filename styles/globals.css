@@ -35,15 +35,12 @@
   }
 
   .mySwiper2 {
-    border-radius: 20px;
-    border-color: #e0e0e0;
-    border-style: solid;
-    border-width: 10px;
-    background-color: #de2424;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 300px;
+    border-bottom: 1px solid #dedede;
+    margin-bottom: 20px;
   }
   .mySwiper2 .swiper-slide {
     background-color: white;
@@ -56,6 +53,7 @@
     max-width: 100%;
     height: 100%;
     width: auto;
+    padding: 10px !important;
   }
 
   .sticky-top {
@@ -63,6 +61,16 @@
     top: 0;
     z-index: 1;
   }
+
+  .bordinha-cinza {
+    border: 1px solid #dedede;
+    border-radius: 5px;
+  }
+
+  .spacer {
+    border-bottom: 1px solid #dedede;
+  }
+
   /* masonry */
 
   .masonryContainer {
@@ -94,26 +102,7 @@
   .masonry-item img {
     position: relative;
   }
-  /* .masonry-item:after {
-    font-weight: bold;
-    background-color: rgba(0, 0, 0, 0);
-    content: counter(masonry);
-    counter-increment: masonry;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.1s ease-in;
-  } */
-  /* .masonry-item:hover:after {
-    font-size: 30px;
-    
-  } */
+
   /* masonry fim */
   .img-card {
     filter: brightness(95%);
