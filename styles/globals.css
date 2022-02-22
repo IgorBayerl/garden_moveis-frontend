@@ -38,7 +38,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 300px;
+    height: clamp(300px, 50vh, 60vh);
+    /* height: 300px; */
     border-bottom: 1px solid #dedede;
     margin-bottom: 20px;
   }

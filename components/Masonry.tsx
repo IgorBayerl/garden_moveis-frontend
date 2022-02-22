@@ -38,14 +38,6 @@ const Masonry: React.FC<Props> = ({ items }) => {
     });
   };
 
-  const wantForSeconds = (seconds: number) => {
-    return new Promise<void>((resolve) => {
-      setTimeout(() => {
-        resolve();
-      }, seconds * 1000);
-    });
-  };
-
   useEffect(() => {
     waitForImages();
   }, [items]);
