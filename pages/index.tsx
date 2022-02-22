@@ -72,7 +72,8 @@ const Home: React.FC<IProps> = ({ data }) => {
 
   useEffect(() => {
     // fetch new data from api
-    fetchData();
+    // fetchData();
+    updateDataWithFilters();
   }, [globalCategoriesData]);
 
   const fetchData = async () => {
@@ -145,6 +146,21 @@ const Home: React.FC<IProps> = ({ data }) => {
       alert(error);
     }
   };
+
+  const updateDataWithFilters = useCallback(() => {
+    let newArr: IProduct[] = [];
+    data.products.forEach((product) => {
+      globalCategoriesData.forEach((category) => {
+        const isCategorySelected = product.categories.indexOf({
+          id: category.id,
+          title: category.title,
+          selected: true,
+        });
+        if (isCategorySelected) newArr.push(product);
+      });
+    });
+    setProductsData(newArr);
+  }, [globalCategoriesData, data]);
 
   const addSelectedToGlobalCategoryData = useCallback(() => {
     const newArr = globalCategoriesData.map((obj) => ({
