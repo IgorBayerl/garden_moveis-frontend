@@ -71,9 +71,8 @@ const Home: React.FC<IProps> = ({ data }) => {
   );
 
   useEffect(() => {
-    // fetch new data from api
-    // fetchData();
-    updateDataWithFilters();
+    // fetchData(); // filter data with api
+    updateDataWithFilters(); // filter data with javascript
   }, [globalCategoriesData]);
 
   const fetchData = async () => {
@@ -148,18 +147,26 @@ const Home: React.FC<IProps> = ({ data }) => {
   };
 
   const updateDataWithFilters = useCallback(() => {
-    let newArr: IProduct[] = [];
-    data.products.forEach((product) => {
-      globalCategoriesData.forEach((category) => {
-        const isCategorySelected = product.categories.indexOf({
-          id: category.id,
-          title: category.title,
-          selected: true,
+    const queryArr = globalCategoriesData
+      .filter((category) => category.selected)
+      .map((category: ICategory) => category.title);
+
+    /// Refazer isso aqui de forma mais elegante
+    if (queryArr.length === 0) {
+      setProductsData(data.products);
+      return;
+    } else {
+      let newArr: IProduct[] = [];
+      data.products.forEach((product) => {
+        let isSelected = false;
+        product.categories.forEach((category) => {
+          if (queryArr.includes(category.title)) isSelected = true;
         });
-        if (isCategorySelected) newArr.push(product);
+        if (isSelected) newArr.push(product);
       });
-    });
-    setProductsData(newArr);
+      setProductsData(newArr);
+      return;
+    }
   }, [globalCategoriesData, data]);
 
   const addSelectedToGlobalCategoryData = useCallback(() => {
