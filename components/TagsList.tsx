@@ -32,19 +32,9 @@ const TagsList: React.FC<IProps> = ({ scrollDirection }) => {
       });
   }, []);
 
-  useEffect(() => {
-    console.log(scrollDirection);
-  }, [scrollDirection]);
-
-  // const handleClick = (id: string) => {
-  //   const newTagsArray = tagsArray.map((tag) => {
-  //     if (tag.id === id) {
-  //       return { ...tag, selected: !tag.selected };
-  //     }
-  //     return tag;
-  //   });
-  //   setTagsArray(newTagsArray);
-  // };
+  // useEffect(() => {
+  //   console.log(scrollDirection);
+  // }, [scrollDirection]);
 
   return (
     <nav className="pt-2 flex w-full max-w-[1400px] justify-center sticky-top bg-white  ">
@@ -62,41 +52,6 @@ const TagsList: React.FC<IProps> = ({ scrollDirection }) => {
             {category.title}
           </Category>
         ))}
-        {/* {JSON.stringify(globalCategoriesData)} */}
-        {/* <Category sellected={true}>test</Category>
-        <Category sellected={true}>AAAA</Category>
-        <Category>test</Category>
-        <Category>BBBB</Category>
-        <Category>CADEIRA</Category>
-        <Category>POLTRONA</Category>
-        <Category>BANQUETA</Category>
-        <Category>MESA</Category>
-        <Category>REDONDA</Category>
-        <Category>test</Category>
-        <Category>test</Category>
-        <Category>test</Category>
-        <Category>test</Category>
-        <Category>test</Category>
-        <Category>test</Category>
-        <Category>test</Category>
-        <Category>test</Category>
-        <Category>test</Category>
-        <Category>test</Category>
-        <Category>BBBB</Category>
-        <Category>CADEIRA</Category>
-        <Category>POLTRONA</Category>
-        <Category>BANQUETA</Category>
-        <Category>MESA</Category>
-        <Category>REDONDA</Category>
-        <Category>test</Category>
-        <Category>test</Category>
-        <Category>test</Category>
-        <Category>test</Category>
-        <Category>test</Category>
-        <Category>test</Category>
-        <Category>test</Category>
-        <Category>test</Category>
-        <Category>test</Category> */}
       </div>
     </nav>
   );

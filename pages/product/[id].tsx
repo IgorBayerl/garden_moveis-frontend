@@ -139,28 +139,17 @@ const Product: React.FC<IProps> = ({ data }) => {
     arrayImagens();
   }, []);
 
-  const captionStyle = {
-    fontSize: "2em",
-    fontWeight: "bold",
-  };
-  const slideNumberStyle = {
-    fontSize: "20px",
-    fontWeight: "bold",
-  };
-
   return (
     <div className="flex flex-col items-center h-screen ">
       <Navbar></Navbar>
-      <BottomMenu scrollDirection={0}></BottomMenu>
+      {/* <BottomMenu scrollDirection={0}></BottomMenu> */}
       <Content>
         <ProductInformation>
           <Left>
             <Swiper
-              style={
-                {
-                  // "--swiper-navigation-color": "#dedede",
-                }
-              }
+              // style={{
+              //   "--swiper-navigation-color": "#dedede",
+              // }}
               loop={true}
               spaceBetween={0}
               navigation={true}
@@ -185,29 +174,19 @@ const Product: React.FC<IProps> = ({ data }) => {
               className="mySwiper"
             >
               {data.product.pictures.map((item: any) => (
-                <SwiperSlide>
+                <SwiperSlide key={item.url}>
                   <img src={item.url} />
                 </SwiperSlide>
               ))}
             </Swiper>
-            <div className="mt-5 flex flex-row flex-wrap">
+            <div className="spacer my-3" />
+            <h1 className="ml-1 text-2xl py-2">Categorias do produto.</h1>
+            <div className="mt-2 flex flex-row flex-wrap">
               {data.product.categories.map((item: any) => (
                 <NoActionCategory key={item.title}>
                   {item.title}
                 </NoActionCategory>
               ))}
-              <NoActionCategory>aaaa</NoActionCategory>
-              <NoActionCategory>aaaa</NoActionCategory>
-              <NoActionCategory>aaaa</NoActionCategory>
-              <NoActionCategory>aaaa</NoActionCategory>
-              <NoActionCategory>aaaa</NoActionCategory>
-              <NoActionCategory>aaaa</NoActionCategory>
-              <NoActionCategory>aaaa</NoActionCategory>
-              <NoActionCategory>aaaa</NoActionCategory>
-              <NoActionCategory>aaaa</NoActionCategory>
-              <NoActionCategory>aaaa</NoActionCategory>
-              <NoActionCategory>aaaa</NoActionCategory>
-              <NoActionCategory>aaaa</NoActionCategory>
             </div>
           </Left>
 
@@ -247,8 +226,30 @@ const Product: React.FC<IProps> = ({ data }) => {
         </ProductInformation>
         {data.product.colection ? (
           <ProductsLine title={"Coleção"}>
-            {JSON.stringify(data.product.colection)}
-            <HCard title={"AAA"}>{<></>}</HCard>
+            {/* {JSON.stringify(data.product.colection)} */}
+            {data.product.colection.products.map((item: any) => (
+              <HCard key={item.id} item={item} />
+            ))}
+          </ProductsLine>
+        ) : (
+          <></>
+        )}
+        {data.product.colection ? (
+          <ProductsLine title={"Categoria 1"}>
+            {/* {JSON.stringify(data.product.colection)} */}
+            {data.product.colection.products.map((item: any) => (
+              <HCard key={item.id} item={item} />
+            ))}
+          </ProductsLine>
+        ) : (
+          <></>
+        )}
+        {data.product.colection ? (
+          <ProductsLine title={"Categoria 2"}>
+            {/* {JSON.stringify(data.product.colection)} */}
+            {data.product.colection.products.map((item: any) => (
+              <HCard key={item.id} item={item} />
+            ))}
           </ProductsLine>
         ) : (
           <></>
