@@ -150,7 +150,7 @@ const Product: React.FC<IProps> = ({ data }) => {
               // style={{
               //   "--swiper-navigation-color": "#dedede",
               // }}
-              loop={true}
+              loop={false}
               spaceBetween={0}
               navigation={true}
               thumbs={{ swiper: thumbsSwiper }}
@@ -165,7 +165,7 @@ const Product: React.FC<IProps> = ({ data }) => {
             </Swiper>
             <Swiper
               onSwiper={setThumbsSwiper}
-              loop={true}
+              loop={false}
               spaceBetween={10}
               slidesPerView={4}
               freeMode={true}
