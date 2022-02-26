@@ -122,6 +122,10 @@ const Product: React.FC<IProps> = ({ data }) => {
 
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
 
+  const [scrollDirection, setScrollDirection] = useState<number>(0);
+  const [lastScrollPosition, setLastScrollPosition] = useState(0);
+  const [offset, setOffset] = useState(0);
+
   const arrayImagens = () => {
     let tempArray: IImage[] = [];
     data.product.pictures.forEach((item: any) => {
@@ -137,12 +141,32 @@ const Product: React.FC<IProps> = ({ data }) => {
 
   useEffect(() => {
     arrayImagens();
+    const onScroll = () => setOffset(window.pageYOffset);
+    // clean up code
+    window.removeEventListener("scroll", onScroll);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
+  useEffect(() => {
+    if (offset > lastScrollPosition) {
+      // quando no ios existe um efeito de mola ao chegar no topo da pagina, isso evita que o menu feche com esse efeito
+      if (offset > lastScrollPosition + 100) {
+        setScrollDirection(1);
+        setLastScrollPosition(offset);
+      }
+    } else {
+      setScrollDirection(0);
+      setLastScrollPosition(offset);
+    }
+  }, [offset]);
 
   return (
     <div className="flex flex-col items-center h-screen ">
       <Navbar></Navbar>
-      {/* <BottomMenu scrollDirection={0}></BottomMenu> */}
+      <BottomMenu
+        currentPage="product"
+        scrollDirection={scrollDirection}
+      ></BottomMenu>
       <Content>
         <ProductInformation>
           <Left>

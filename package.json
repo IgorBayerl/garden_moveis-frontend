@@ -10,6 +10,7 @@
     "dotenv": "^14.2.0",
     "graphql-request": "^4.0.0",
     "imagesloaded": "^4.1.4",
+    "mapbox-gl": "^2.7.0",
     "next": "latest",
     "react": "^17.0.2",
     "react-carousel-minimal": "^1.4.1",

@@ -220,7 +220,10 @@ const Home: React.FC<IProps> = ({ data }) => {
     >
       <div className="flex flex-col items-center ">
         <Navbar></Navbar>
-        <BottomMenu scrollDirection={scrollDirection}></BottomMenu>
+        <BottomMenu
+          currentPage="home"
+          scrollDirection={scrollDirection}
+        ></BottomMenu>
         <TagsList scrollDirection={scrollDirection}></TagsList>
         <MainContent>
           <Masonry items={productsData}></Masonry>
