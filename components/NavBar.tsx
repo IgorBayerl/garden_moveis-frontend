@@ -22,7 +22,7 @@ const Navbar: React.FC = () => {
         </div>
         <div className="hidden sm:flex bg-red-300 align-middle  ">
           <Link href="/contact">
-            <a className="flex text-xl text-icon-align">
+            <a className="flex text-xl px-3 text-icon-align">
               <FiMail />
               Contato
             </a>
