@@ -13,6 +13,7 @@ import { GlobalDataContext } from "../components/Context";
 import { ICategory } from "./../interfaces/data";
 import Category from "./../components/Category";
 import Masonry from "../components/Masonry";
+import Footer from "../components/Footer";
 
 interface IProps {
   data: IProduct;
@@ -228,6 +229,8 @@ const Home: React.FC<IProps> = ({ data }) => {
         <MainContent>
           <Masonry items={productsData}></Masonry>
         </MainContent>
+
+        <Footer />
       </div>
     </GlobalDataContext.Provider>
   );
