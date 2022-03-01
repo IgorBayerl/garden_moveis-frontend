@@ -10,9 +10,7 @@ import { HiMail } from "react-icons/hi";
 import { FiInstagram, FiMail, FiMapPin } from "react-icons/fi";
 import { ImWhatsapp } from "react-icons/im";
 import Link from "next/link";
-
-// import ReactMapboxGl, { Layer, Feature } from "react-mapbox-gl";
-import "mapbox-gl/dist/mapbox-gl.css";
+import Map, { Marker } from "react-map-gl";
 
 export default function Contact() {
   const [scrollDirection, setScrollDirection] = useState<number>(0);
@@ -39,10 +37,6 @@ export default function Contact() {
     }
   }, [offset]);
 
-  // const Map = ReactMapboxGl({
-  //   accessToken:
-  //     "pk.eyJ1IjoiZmFicmljOCIsImEiOiJjaWc5aTV1ZzUwMDJwdzJrb2w0dXRmc2d0In0.p6GGlfyV-WksaDV_KdN27A",
-  // });
   return (
     <div className="flex flex-col items-center ">
       <Navbar></Navbar>
@@ -56,54 +50,54 @@ export default function Contact() {
             Entre em contato!
           </h1>
         </div>
-        <div className="sm:flex max-h-fit my-10 gap-3">
-          <form className="bg-white shadow-md w-full sm:w-1/2 rounded px-8 pt-6 pb-8 mb-4 sm:mb-0">
-            <div className="mb-4 ">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                Nome
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="name"
-                type="text"
-                placeholder="Nome"
-              />
+        <div className="sm:flex max-h-[80vh] my-10 gap-3">
+          <form className="bg-white shadow-md w-full sm:w-1/2 rounded px-8 pt-6 pb-8 mb-4 sm:mb-0 flex flex-col justify-between">
+            <div className="flex flex-col flex-grow">
+              <div className="mb-4 ">
+                <label className="block text-gray-700  text-sm font-bold mb-2 ">
+                  Nome
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="name"
+                  type="text"
+                  placeholder="Nome"
+                />
+              </div>
+              <div className="mb-4 ">
+                <label className="block text-gray-700  text-sm font-bold mb-2 ">
+                  Email
+                </label>
+                <input
+                  className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="email"
+                  type="text"
+                  placeholder="Email"
+                />
+              </div>
+              <div className="mb-4 ">
+                <label className="block text-gray-700  text-sm font-bold mb-2 ">
+                  Mensagem
+                </label>
+                <textarea
+                  className="shadow appearance-none border rounded w-full mintextarea-h py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                  id="message"
+                  placeholder="Mensagem"
+                />
+              </div>
             </div>
-            <div className="mb-4 ">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                Email
-              </label>
-              <input
-                className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="email"
-                type="text"
-                placeholder="Email"
-              />
-            </div>
-            <div className="mb-4 ">
-              <label className="block text-gray-700 text-sm font-bold mb-2">
-                Mensagem
-              </label>
-              <textarea
-                className="shadow appearance-none border rounded w-full mintextarea-h py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                id="message"
-                placeholder="Mensagem"
-              />
-            </div>
-            <div>
-              <button
-                type="submit"
-                className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
-              >
-                Enviar Mensagem
-              </button>
-            </div>
+            <button
+              type="submit"
+              className="shadow bg-purple-500 hover:bg-purple-400 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+            >
+              Enviar Mensagem
+            </button>
           </form>
           <div className=" w-full h-full sm:w-1/2">
             <div className="bg-red-400 p-4 mb-3 w-full">
               <h1>Redes sociais</h1>
               <Link href={""}>
-                <a className="sm:text-2xl text-xl  text-icon-align">
+                <a className="sm:text-xl lg:text-2xl  text-2xl  text-icon-align">
                   <div className="bg-blue-400 sm:p-5 p-4 rounded-full">
                     <FiMapPin />
                   </div>
@@ -111,7 +105,7 @@ export default function Contact() {
                 </a>
               </Link>
               <Link href={""}>
-                <a className="sm:text-2xl text-xl my-5 text-icon-align">
+                <a className="sm:text-xl lg:text-2xl  text-2xl my-5 text-icon-align">
                   <div className="bg-blue-400 sm:p-5 p-4 rounded-full">
                     <FiMail />
                   </div>
@@ -119,7 +113,7 @@ export default function Contact() {
                 </a>
               </Link>
               <Link href={""}>
-                <a className="sm:text-2xl text-xl  text-icon-align">
+                <a className="sm:text-xl lg:text-2xl  text-2xl  text-icon-align">
                   <div className="bg-blue-400 sm:p-5 p-4 rounded-full">
                     <FiInstagram />
                   </div>{" "}
@@ -127,7 +121,7 @@ export default function Contact() {
                 </a>
               </Link>
               <Link href={"https://wa.me/5547984424549"}>
-                <a className="sm:text-2xl text-xl mt-5 text-icon-align">
+                <a className="sm:text-xl lg:text-2xl  text-2xl mt-5 text-icon-align">
                   <div className="bg-blue-400 sm:p-5 p-4 rounded-full">
                     <ImWhatsapp />
                   </div>
@@ -135,31 +129,34 @@ export default function Contact() {
                 </a>
               </Link>
             </div>
-            <div className="bg-red-500 w-full py-20">
-              {/* <Map
-                style="mapbox://styles/mapbox/streets-v9"
-                containerStyle={{
-                  height: "100vh",
-                  width: "100vw",
+            <div className="bg-red-500 w-full  ">
+              <Map
+                initialViewState={{
+                  latitude: -26.27362,
+                  longitude: -49.34624,
+                  zoom: 13,
                 }}
+                mapboxAccessToken={
+                  "pk.eyJ1IjoiaWdvcmJheWVybCIsImEiOiJjbDAzM2h0d3owMTg2M2lxd2s2ODE2OGd0In0.6Irwj_LC4yNWwckKW3mGpg"
+                }
+                style={{ width: "100%", height: 300, background: "white" }}
+                mapStyle="mapbox://styles/mapbox/streets-v9"
               >
-                <Layer
-                  type="symbol"
-                  id="marker"
-                  layout={{ "icon-image": "marker-15" }}
+                <Marker
+                  latitude={-26.27362}
+                  longitude={-49.34624}
+                  anchor="bottom"
                 >
-                  <Feature
-                    coordinates={[-0.481747846041145, 51.3233379650232]}
-                  />
-                </Layer>
-              </Map> */}
+                  <img className="logoMapPin" src="./logoPin.svg" />
+                </Marker>
+              </Map>
             </div>
           </div>
         </div>
       </Content>
       <div className="background-one-collors sm:background-two-collors">
-        <div className="bg-red-300 bg-p-1">A</div>
-        <div className="bg-blue-300 bg-p-2">B</div>
+        <div className="bg-green-300 bg-p-1">A</div>
+        <div className="bg-green-500 bg-p-2">B</div>
       </div>
     </div>
   );

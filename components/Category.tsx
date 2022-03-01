@@ -18,7 +18,7 @@ const Category: React.FC<Props> = ({ children, sellected = false, itemId }) => {
     return (
       <span
         onClick={() => onClickHandler(itemId)}
-        className="cursor-pointer inline-block bg-green-600 text-white rounded-full px-3 py-1 text-sm sm:text-sm font-semibold mx-1 mb-2"
+        className="cursor-pointer inline-block bg-verde-1 text-white rounded-full px-3 py-1 text-sm sm:text-sm font-semibold mx-1 mb-2"
       >
         {children}
       </span>

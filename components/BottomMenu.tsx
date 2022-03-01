@@ -25,7 +25,7 @@ const BottomMenu: React.FC<IProps> = ({
     <nav
       className={`${visibleClass} bottom-menu flex sm:hidden  z-50 shadow-md my-4 h-16 justify-evenly bg-white rounded-full fixed bottom-0 `}
     >
-      <div className="flex items-center">
+      <div className="flex items-center rounded-full">
         <Link href="/">
           <HomeIcon
             className={`cursor-pointer  h-12 w-12 p-2 m-6 ${
@@ -34,7 +34,7 @@ const BottomMenu: React.FC<IProps> = ({
           />
         </Link>
       </div>
-      <div className="flex items-center">
+      <div className="flex items-center rounded-full">
         <Link href="/contact">
           <MailIcon
             className={`cursor-pointer  h-12 w-12 p-2 m-6 ${
