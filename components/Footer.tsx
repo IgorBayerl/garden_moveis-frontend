@@ -1,14 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { useContext } from "react";
-import { GlobalDataContext } from "./Context";
-import { HiMail } from "react-icons/hi";
 import { FiMail, FiHome } from "react-icons/fi";
 
 const Footer: React.FC = () => {
-  const { globalCategoriesData } = useContext(GlobalDataContext);
   return (
-    <div className="w-full bg-white test-shaddow  flex justify-center ">
+    <div className="w-full hidden md:flex bg-white test-shaddow   justify-center ">
       <nav className="flex w-full  max-w-[1400px] navbar navbar-expand-lg sm:justify-between justify-center px-10 py-2 navbar-light ">
         <div className="flex items-center ">
           <Link href="/">

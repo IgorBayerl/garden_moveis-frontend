@@ -33,9 +33,11 @@ const Masonry: React.FC<Props> = ({ items }) => {
   const resizeAllMasonryItems = () => {
     console.log("resizeAllMasonryItems");
     const allItems = document.querySelectorAll(".masonry-item");
-    allItems.forEach((item: any) => {
-      resizeMasonryItem(item);
-    });
+    if (allItems.length > 0) {
+      allItems.forEach((item: any) => {
+        resizeMasonryItem(item);
+      });
+    }
   };
 
   useEffect(() => {
@@ -44,11 +46,13 @@ const Masonry: React.FC<Props> = ({ items }) => {
 
   const waitForImages = () => {
     const allItems = document.querySelectorAll(".masonry-item");
-    allItems.forEach((item: any) => {
-      imagesLoaded(item, () => {
-        resizeMasonryItem(item);
+    if (allItems.length > 0) {
+      allItems.forEach((item: any) => {
+        imagesLoaded(item, () => {
+          resizeMasonryItem(item);
+        });
       });
-    });
+    }
   };
 
   useEffect(() => {

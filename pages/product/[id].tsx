@@ -129,14 +129,16 @@ const Product: React.FC<IProps> = ({ data }) => {
 
   const arrayImagens = () => {
     let tempArray: IImage[] = [];
-    data.product.pictures.forEach((item: any) => {
-      tempArray.push({
-        id: item.id,
-        original: item.url,
-        thumbnail: item.url,
-        originalClass: "original-image-class",
+    if (data.product.pictures.length > 0) {
+      data.product.pictures.forEach((item: any) => {
+        tempArray.push({
+          id: item.id,
+          original: item.url,
+          thumbnail: item.url,
+          originalClass: "original-image-class",
+        });
       });
-    });
+    }
     setImagesArray(tempArray);
   };
 

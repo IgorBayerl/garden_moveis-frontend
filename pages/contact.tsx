@@ -149,8 +149,8 @@ export default function Contact() {
           </div>
         </div>
       </Content>
+      {/* <Footer /> */}
 
-      <Footer />
       <div className="background-one-collors md:background-two-collors">
         <div className="bg-[#dbf1d8] bg-p-1"></div>
         <div className="bg-[#dbf1d8] bg-p-2"></div>
