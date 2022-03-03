@@ -11,8 +11,8 @@ import TagsList from "./../components/TagsList";
 
 import { GlobalDataContext } from "../components/Context";
 import { ICategory } from "./../interfaces/data";
-import Category from "./../components/Category";
 import Masonry from "../components/Masonry";
+import Footer from "../components/Footer";
 
 interface IProps {
   data: IProduct;
@@ -157,13 +157,17 @@ const Home: React.FC<IProps> = ({ data }) => {
       return;
     } else {
       let newArr: IProduct[] = [];
-      data.products.forEach((product) => {
-        let isSelected = false;
-        product.categories.forEach((category) => {
-          if (queryArr.includes(category.title)) isSelected = true;
+      if (data.products.length > 0) {
+        data.products.forEach((product) => {
+          let isSelected = false;
+          if (product.categories.length > 0) {
+            product.categories.forEach((category) => {
+              if (queryArr.includes(category.title)) isSelected = true;
+            });
+          }
+          if (isSelected) newArr.push(product);
         });
-        if (isSelected) newArr.push(product);
-      });
+      }
       setProductsData(newArr);
       return;
     }
@@ -228,6 +232,8 @@ const Home: React.FC<IProps> = ({ data }) => {
         <MainContent>
           <Masonry items={productsData}></Masonry>
         </MainContent>
+
+        {/* <Footer /> */}
       </div>
     </GlobalDataContext.Provider>
   );

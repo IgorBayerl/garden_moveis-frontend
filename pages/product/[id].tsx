@@ -22,6 +22,7 @@ import { FreeMode, Navigation, Thumbs } from "swiper";
 import NoActionCategory from "../../components/NoActionCategory";
 import ProductsLine from "../../components/ProductsLine";
 import HCard from "../../components/HCard";
+import Footer from "../../components/Footer";
 
 export const getStaticPaths = async () => {
   const url = `${process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT}`;
@@ -71,7 +72,7 @@ export const getStaticProps = async (context: any) => {
           title
         }
         colection {
-          products {
+          products (where: { id_not : ${JSON.stringify(id)} }) {
             id
             title
             pictures {
@@ -128,14 +129,16 @@ const Product: React.FC<IProps> = ({ data }) => {
 
   const arrayImagens = () => {
     let tempArray: IImage[] = [];
-    data.product.pictures.forEach((item: any) => {
-      tempArray.push({
-        id: item.id,
-        original: item.url,
-        thumbnail: item.url,
-        originalClass: "original-image-class",
+    if (data.product.pictures.length > 0) {
+      data.product.pictures.forEach((item: any) => {
+        tempArray.push({
+          id: item.id,
+          original: item.url,
+          thumbnail: item.url,
+          originalClass: "original-image-class",
+        });
       });
-    });
+    }
     setImagesArray(tempArray);
   };
 
@@ -279,6 +282,7 @@ const Product: React.FC<IProps> = ({ data }) => {
           <></>
         )}
       </Content>
+
       {/* <h1>Product page</h1>
       <p>{data.product.title}</p>
       <p>{data.product.description}</p>
