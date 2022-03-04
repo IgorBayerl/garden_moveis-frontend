@@ -2,18 +2,80 @@ import { useEffect, useState } from "react";
 import BottomMenu from "../components/BottomMenu";
 import Content from "../components/Content";
 import Navbar from "../components/NavBar";
-import { FiInstagram, FiMail, FiMapPin } from "react-icons/fi";
+import { FiInstagram, FiMail, FiMapPin, FiPhone } from "react-icons/fi";
 import { ImWhatsapp } from "react-icons/im";
 import Link from "next/link";
 import Map, { Marker } from "react-map-gl";
 import Footer from "../components/Footer";
+import { gql, GraphQLClient } from "graphql-request";
 
-export default function Contact() {
+export const getStaticProps = async () => {
+  const url = `${process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT}`;
+  const graphQLClient = new GraphQLClient(url, {
+    headers: {
+      Authorization: `Bearer ${process.env.NEXT_PUBLIC_GRAPHCMS_API_KEY}`,
+    },
+  });
+  const query = gql`
+    {
+      generals {
+        phoneNumber
+        whatsapp
+        email
+        address
+        instagram
+        pictures {
+          url
+        }
+        localization {
+          latitude
+          longitude
+        }
+      }
+    }
+  `;
+  const rawData = await graphQLClient.request(query);
+
+  const generals = rawData.generals[0];
+  const data = {
+    phoneNumber: generals.phoneNumber,
+    whatsapp: generals.whatsapp,
+    email: generals.email,
+    address: generals.address,
+    instagram: generals.instagram,
+    pictures: generals.pictures,
+    localization: generals.localization,
+  };
+  return {
+    props: { data },
+    revalidate: 60,
+  };
+};
+
+interface IProps {
+  data: {
+    phoneNumber: string[];
+    whatsapp: string[];
+    email: string;
+    address: string;
+    instagram: string;
+    pictures: {
+      url: string;
+    }[];
+    localization: {
+      latitude: number;
+      longitude: number;
+    };
+  };
+}
+
+const Contact: React.FC<IProps> = ({ data }) => {
   const [scrollDirection, setScrollDirection] = useState<number>(0);
   const [lastScrollPosition, setLastScrollPosition] = useState(0);
   const [offset, setOffset] = useState(0);
 
   useEffect(() => {
+    console.log(data);
     const onScroll = () => setOffset(window.pageYOffset);
     // clean up code
     window.removeEventListener("scroll", onScroll);
@@ -91,7 +153,9 @@ export default function Contact() {
           </form>
           <div className=" w-full h-full md:w-1/2">
             <div className="bg-verde-2 rounded-[5px] p-4 mb-3 w-full">
-              <Link href={"https://maps.google.com/?ll=-26.27362,-49.34624"}>
+              <Link
+                href={`https://maps.google.com/?ll=${data.localization.latitude},${data.localization.longitude}`}
+              >
                 <a className="text-xl transition02 hover:bg-cinza-clarin rounded-full lg:text-2xl   text-icon-align">
                   <div className="bg-verde-1  contact-icon sm:p-5 p-4 rounded-full">
                     <FiMapPin />
@@ -99,7 +163,7 @@ export default function Contact() {
                   rua carlos manoel linzmeyer 1500
                 </a>
               </Link>
-              <Link href={"mailto:gardenmoveis01@gmail.com "}>
+              <Link href={`mailto:${data.email} `}>
                 <a className="text-xl transition02 hover:bg-cinza-clarin rounded-full lg:text-2xl  my-5 text-icon-align">
                   <div className="bg-verde-1  contact-icon sm:p-5 p-4 rounded-full">
                     <FiMail />
@@ -107,28 +171,40 @@ export default function Contact() {
                   gardenmoveis01@gmail.com
                 </a>
               </Link>
-              <Link href={"https://www.instagram.com/garden.moveissbs/"}>
+              <Link href={`https://www.instagram.com/${data.instagram}/`}>
                 <a className="text-xl transition02 hover:bg-cinza-clarin rounded-full lg:text-2xl   text-icon-align">
                   <div className="bg-verde-1  contact-icon sm:p-5 p-4 rounded-full">
                     <FiInstagram />
                   </div>{" "}
-                  @garden_moveissbs
+                  {data.instagram}
                 </a>
               </Link>
-              <Link href={"https://wa.me/5547984424549"}>
+              <Link href={`https://wa.me/${data.whatsapp[0]}`}>
                 <a className="text-xl transition02 hover:bg-cinza-clarin rounded-full lg:text-2xl  mt-5 text-icon-align">
                   <div className="bg-verde-1  contact-icon sm:p-5 p-4 rounded-full">
                     <ImWhatsapp />
                   </div>
-                  (47) 9 8442-4549)
+                  {data.whatsapp[0]}
                 </a>
               </Link>
+              {data.phoneNumber.length > 0
+                ? data.phoneNumber.map((phone, index) => (
+                    <Link href={`tel:${phone}`} key={index}>
+                      <a className="text-xl transition02 hover:bg-cinza-clarin rounded-full lg:text-2xl  mt-5 text-icon-align">
+                        <div className="bg-verde-1  contact-icon sm:p-5 p-4 rounded-full">
+                          <FiPhone />
+                        </div>
+                        {phone}
+                      </a>
+                    </Link>
+                  ))
+                : null}
             </div>
             <div className="bg-red-500 w-full  ">
               <Map
                 initialViewState={{
-                  latitude: -26.27362,
-                  longitude: -49.34624,
+                  latitude: data.localization.latitude,
+                  longitude: data.localization.longitude,
                   zoom: 13,
                 }}
                 mapboxAccessToken={
@@ -138,8 +214,8 @@ export default function Contact() {
                 mapStyle="mapbox://styles/mapbox/light-v10"
               >
                 <Marker
-                  latitude={-26.27362}
-                  longitude={-49.34624}
+                  latitude={data.localization.latitude}
+                  longitude={data.localization.longitude}
                   anchor="bottom"
                 >
                   <img className="logoMapPin" src="./logoPin.svg" />
@@ -157,4 +233,6 @@ export default function Contact() {
       </div>
     </div>
   );
-}
+};
+
+export default Contact;
