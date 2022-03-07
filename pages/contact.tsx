@@ -168,7 +168,7 @@ const Contact: React.FC<IProps> = ({ data }) => {
                   <div className="bg-verde-1  contact-icon sm:p-5 p-4 rounded-full">
                     <FiMail />
                   </div>
-                  gardenmoveis01@gmail.com
+                  {data.email}
                 </a>
               </Link>
               <Link href={`https://www.instagram.com/${data.instagram}/`}>
