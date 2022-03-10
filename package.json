@@ -6,6 +6,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "@emailjs/browser": "^3.4.0",
     "@heroicons/react": "^1.0.5",
     "dotenv": "^14.2.0",
     "graphql-request": "^4.0.0",

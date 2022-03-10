@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import BottomMenu from "../components/BottomMenu";
 import Content from "../components/Content";
 import Navbar from "../components/NavBar";
@@ -8,6 +8,7 @@ import Link from "next/link";
 import Map, { Marker } from "react-map-gl";
 import Footer from "../components/Footer";
 import { gql, GraphQLClient } from "graphql-request";
+import emailjs from "@emailjs/browser";
 
 export const getStaticProps = async () => {
   const url = `${process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT}`;
@@ -91,6 +92,31 @@ const Contact: React.FC<IProps> = ({ data }) => {
     }
   }, [offset]);
 
+  const formumario = useRef();
+
+  const sendEmail = (e: any) => {
+    e.preventDefault();
+
+    emailjs
+      .sendForm(
+        "service_m81qnjv",
+        "template_j7c6c78",
+        e.target,
+        "WsF1nIx9jagALlwQZ"
+      )
+      .then(
+        (result) => {
+          console.log(result.text);
+        },
+        (error) => {
+          console.log(error.text);
+        }
+      )
+      .then(() => {
+        e.target.reset();
+      });
+  };
+
   /* Teste contact git debug */
   return (
     <div className="flex flex-col items-center ">
@@ -106,7 +132,11 @@ const Contact: React.FC<IProps> = ({ data }) => {
           </h1>
         </div>
         <div className="md:parent ">
-          <form className="bg-white div1 flex justify-between flex-col p-5 rounded-md">
+          <form
+            ref={formumario}
+            onSubmit={sendEmail}
+            className="bg-white div1 flex justify-between flex-col p-5 rounded-md"
+          >
             <div className="flex flex-col flex-grow">
               <div className="mb-4 ">
                 <label className="block text-gray-700  text-sm font-bold mb-2 ">
@@ -116,6 +146,7 @@ const Contact: React.FC<IProps> = ({ data }) => {
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="name"
                   type="text"
+                  name="from_name"
                   placeholder="Nome"
                 />
               </div>
@@ -126,7 +157,8 @@ const Contact: React.FC<IProps> = ({ data }) => {
                 <input
                   className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="email"
-                  type="text"
+                  type="email"
+                  name="reply_to"
                   placeholder="Email"
                 />
               </div>
@@ -137,16 +169,22 @@ const Contact: React.FC<IProps> = ({ data }) => {
                 <textarea
                   className="shadow appearance-none border rounded w-full mintextarea-h py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                   id="message"
+                  name="message"
                   placeholder="Mensagem"
                 />
               </div>
             </div>
-            <button
+            <input
+              type="submit"
+              className="cursor-pointer shadow bg-verde-1 transition02 hover:bg-verde-2 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
+              value="Enviar Mensagem"
+            />
+            {/* <button
               type="submit"
               className="shadow bg-verde-1 transition02 hover:bg-verde-2 focus:shadow-outline focus:outline-none text-white font-bold py-2 px-4 rounded"
             >
               Enviar Mensagem
-            </button>
+            </button> */}
           </form>
           <div className="bg-verde-2 div2 p-5  rounded-md">
             {data.links.map((link) => (
