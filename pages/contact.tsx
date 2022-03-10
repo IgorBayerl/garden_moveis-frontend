@@ -3,7 +3,7 @@ import BottomMenu from "../components/BottomMenu";
 import Content from "../components/Content";
 import Navbar from "../components/NavBar";
 import { FiInstagram, FiMail, FiMapPin, FiPhone } from "react-icons/fi";
-import { ImWhatsapp } from "react-icons/im";
+import * as RIconIM from "react-icons/im";
 import Link from "next/link";
 import Map, { Marker } from "react-map-gl";
 import Footer from "../components/Footer";
@@ -108,8 +108,8 @@ const Contact: React.FC<IProps> = ({ data }) => {
             Entre em contato!
           </h1>
         </div>
-        <div className="md:flex max-h-[80vh] my-10 gap-3">
-          <form className="bg-white shadow-md w-full md:w-1/2 rounded px-8 pt-6 pb-8 mb-4 sm:mb-0 flex flex-col justify-between">
+        <div className="md:parent ">
+          <form className="bg-white div1 flex justify-between flex-col p-5 rounded-md">
             <div className="flex flex-col flex-grow">
               <div className="mb-4 ">
                 <label className="block text-gray-700  text-sm font-bold mb-2 ">
@@ -151,77 +151,75 @@ const Contact: React.FC<IProps> = ({ data }) => {
               Enviar Mensagem
             </button>
           </form>
-          <div className=" w-full h-full md:w-1/2">
-            <div className="bg-verde-2 rounded-[5px] p-4 mb-3 w-full">
-              <Link
-                href={`https://maps.google.com/?ll=${data.localization.latitude},${data.localization.longitude}`}
+          <div className="bg-verde-2 div2 p-5 rounded-md">
+            <Link
+              href={`https://maps.google.com/?ll=${data.localization.latitude},${data.localization.longitude}`}
+            >
+              <a className="text-xl transition02 hover:bg-cinza-clarin rounded-full lg:text-2xl   text-icon-align">
+                <div className="bg-verde-1  contact-icon sm:p-5 p-4 rounded-full">
+                  <FiMapPin />
+                </div>
+                rua carlos manoel linzmeyer 1500
+              </a>
+            </Link>
+            <Link href={`mailto:${data.email} `}>
+              <a className="text-xl transition02 hover:bg-cinza-clarin rounded-full lg:text-2xl  my-5 text-icon-align">
+                <div className="bg-verde-1  contact-icon sm:p-5 p-4 rounded-full">
+                  <FiMail />
+                </div>
+                {data.email}
+              </a>
+            </Link>
+            <Link href={`https://www.instagram.com/${data.instagram}/`}>
+              <a className="text-xl transition02 hover:bg-cinza-clarin rounded-full lg:text-2xl   text-icon-align">
+                <div className="bg-verde-1  contact-icon sm:p-5 p-4 rounded-full">
+                  <FiInstagram />
+                </div>{" "}
+                {data.instagram}
+              </a>
+            </Link>
+            <Link href={`https://wa.me/${data.whatsapp[0]}`}>
+              <a className="text-xl transition02 hover:bg-cinza-clarin rounded-full lg:text-2xl  mt-5 text-icon-align">
+                <div className="bg-verde-1  contact-icon sm:p-5 p-4 rounded-full">
+                  <RIconIM.ImWhatsapp />
+                </div>
+                {data.whatsapp[0]}
+              </a>
+            </Link>
+            {data.phoneNumber.length > 0
+              ? data.phoneNumber.map((phone, index) => (
+                  <Link href={`tel:${phone}`} key={index}>
+                    <a className="text-xl transition02 hover:bg-cinza-clarin rounded-full lg:text-2xl  mt-5 text-icon-align">
+                      <div className="bg-verde-1  contact-icon sm:p-5 p-4 rounded-full">
+                        <FiPhone />
+                      </div>
+                      {phone}
+                    </a>
+                  </Link>
+                ))
+              : null}
+          </div>
+          <div className="bg-red-500 div3  rounded-md">
+            <Map
+              initialViewState={{
+                latitude: data.localization.latitude,
+                longitude: data.localization.longitude,
+                zoom: 13,
+              }}
+              mapboxAccessToken={
+                "pk.eyJ1IjoiaWdvcmJheWVybCIsImEiOiJjbDAzM2h0d3owMTg2M2lxd2s2ODE2OGd0In0.6Irwj_LC4yNWwckKW3mGpg"
+              }
+              style={{ width: "100%", height: 300, background: "white" }}
+              mapStyle="mapbox://styles/mapbox/light-v10"
+            >
+              <Marker
+                latitude={data.localization.latitude}
+                longitude={data.localization.longitude}
+                anchor="bottom"
               >
-                <a className="text-xl transition02 hover:bg-cinza-clarin rounded-full lg:text-2xl   text-icon-align">
-                  <div className="bg-verde-1  contact-icon sm:p-5 p-4 rounded-full">
-                    <FiMapPin />
-                  </div>
-                  rua carlos manoel linzmeyer 1500
-                </a>
-              </Link>
-              <Link href={`mailto:${data.email} `}>
-                <a className="text-xl transition02 hover:bg-cinza-clarin rounded-full lg:text-2xl  my-5 text-icon-align">
-                  <div className="bg-verde-1  contact-icon sm:p-5 p-4 rounded-full">
-                    <FiMail />
-                  </div>
-                  {data.email}
-                </a>
-              </Link>
-              <Link href={`https://www.instagram.com/${data.instagram}/`}>
-                <a className="text-xl transition02 hover:bg-cinza-clarin rounded-full lg:text-2xl   text-icon-align">
-                  <div className="bg-verde-1  contact-icon sm:p-5 p-4 rounded-full">
-                    <FiInstagram />
-                  </div>{" "}
-                  {data.instagram}
-                </a>
-              </Link>
-              <Link href={`https://wa.me/${data.whatsapp[0]}`}>
-                <a className="text-xl transition02 hover:bg-cinza-clarin rounded-full lg:text-2xl  mt-5 text-icon-align">
-                  <div className="bg-verde-1  contact-icon sm:p-5 p-4 rounded-full">
-                    <ImWhatsapp />
-                  </div>
-                  {data.whatsapp[0]}
-                </a>
-              </Link>
-              {data.phoneNumber.length > 0
-                ? data.phoneNumber.map((phone, index) => (
-                    <Link href={`tel:${phone}`} key={index}>
-                      <a className="text-xl transition02 hover:bg-cinza-clarin rounded-full lg:text-2xl  mt-5 text-icon-align">
-                        <div className="bg-verde-1  contact-icon sm:p-5 p-4 rounded-full">
-                          <FiPhone />
-                        </div>
-                        {phone}
-                      </a>
-                    </Link>
-                  ))
-                : null}
-            </div>
-            <div className="bg-red-500 w-full  ">
-              <Map
-                initialViewState={{
-                  latitude: data.localization.latitude,
-                  longitude: data.localization.longitude,
-                  zoom: 13,
-                }}
-                mapboxAccessToken={
-                  "pk.eyJ1IjoiaWdvcmJheWVybCIsImEiOiJjbDAzM2h0d3owMTg2M2lxd2s2ODE2OGd0In0.6Irwj_LC4yNWwckKW3mGpg"
-                }
-                style={{ width: "100%", height: 300, background: "white" }}
-                mapStyle="mapbox://styles/mapbox/light-v10"
-              >
-                <Marker
-                  latitude={data.localization.latitude}
-                  longitude={data.localization.longitude}
-                  anchor="bottom"
-                >
-                  <img className="logoMapPin" src="./logoPin.svg" />
-                </Marker>
-              </Map>
-            </div>
+                <img className="logoMapPin" src="./logoPin.svg" />
+              </Marker>
+            </Map>
           </div>
         </div>
       </Content>
