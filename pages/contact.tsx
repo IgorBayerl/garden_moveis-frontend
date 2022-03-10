@@ -19,17 +19,17 @@ export const getStaticProps = async () => {
   const query = gql`
     {
       generals {
-        phoneNumber
-        whatsapp
-        email
-        address
-        instagram
-        pictures {
-          url
-        }
         localization {
           latitude
           longitude
+        }
+        links {
+          title
+          url
+          icon
+        }
+        pictures {
+          url
         }
       }
     }
@@ -38,11 +38,7 @@ export const getStaticProps = async () => {
 
   const generals = rawData.generals[0];
   const data = {
-    phoneNumber: generals.phoneNumber,
-    whatsapp: generals.whatsapp,
-    email: generals.email,
-    address: generals.address,
-    instagram: generals.instagram,
+    links: generals.links,
     pictures: generals.pictures,
     localization: generals.localization,
   };
@@ -54,11 +50,11 @@ export const getStaticProps = async () => {
 
 interface IProps {
   data: {
-    phoneNumber: string[];
-    whatsapp: string[];
-    email: string;
-    address: string;
-    instagram: string;
+    links: {
+      title: string;
+      url: string;
+      icon: string;
+    }[];
     pictures: {
       url: string;
     }[];
@@ -151,53 +147,18 @@ const Contact: React.FC<IProps> = ({ data }) => {
               Enviar Mensagem
             </button>
           </form>
-          <div className="bg-verde-2 div2 p-5 rounded-md">
-            <Link
-              href={`https://maps.google.com/?ll=${data.localization.latitude},${data.localization.longitude}`}
-            >
-              <a className="text-xl transition02 hover:bg-cinza-clarin rounded-full lg:text-2xl   text-icon-align">
-                <div className="bg-verde-1  contact-icon sm:p-5 p-4 rounded-full">
-                  <FiMapPin />
-                </div>
-                rua carlos manoel linzmeyer 1500
-              </a>
-            </Link>
-            <Link href={`mailto:${data.email} `}>
-              <a className="text-xl transition02 hover:bg-cinza-clarin rounded-full lg:text-2xl  my-5 text-icon-align">
-                <div className="bg-verde-1  contact-icon sm:p-5 p-4 rounded-full">
-                  <FiMail />
-                </div>
-                {data.email}
-              </a>
-            </Link>
-            <Link href={`https://www.instagram.com/${data.instagram}/`}>
-              <a className="text-xl transition02 hover:bg-cinza-clarin rounded-full lg:text-2xl   text-icon-align">
-                <div className="bg-verde-1  contact-icon sm:p-5 p-4 rounded-full">
-                  <FiInstagram />
-                </div>{" "}
-                {data.instagram}
-              </a>
-            </Link>
-            <Link href={`https://wa.me/${data.whatsapp[0]}`}>
-              <a className="text-xl transition02 hover:bg-cinza-clarin rounded-full lg:text-2xl  mt-5 text-icon-align">
-                <div className="bg-verde-1  contact-icon sm:p-5 p-4 rounded-full">
-                  <RIconIM.ImWhatsapp />
-                </div>
-                {data.whatsapp[0]}
-              </a>
-            </Link>
-            {data.phoneNumber.length > 0
-              ? data.phoneNumber.map((phone, index) => (
-                  <Link href={`tel:${phone}`} key={index}>
-                    <a className="text-xl transition02 hover:bg-cinza-clarin rounded-full lg:text-2xl  mt-5 text-icon-align">
-                      <div className="bg-verde-1  contact-icon sm:p-5 p-4 rounded-full">
-                        <FiPhone />
-                      </div>
-                      {phone}
-                    </a>
-                  </Link>
-                ))
-              : null}
+          <div className="bg-verde-2 div2 p-5  rounded-md">
+            {data.links.map((link) => (
+              <Link href={link.url}>
+                <a className="text-xl transition02 hover:bg-cinza-clarin rounded-full lg:text-2xl  my-2 text-icon-align">
+                  <div className="bg-verde-1  contact-icon sm:p-5 p-4 rounded-full">
+                    <RIconIM.ImWhatsapp />
+                  </div>
+
+                  {link.title}
+                </a>
+              </Link>
+            ))}
           </div>
           <div className="bg-red-500 div3  rounded-md">
             <Map
