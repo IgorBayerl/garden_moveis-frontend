@@ -91,6 +91,7 @@ const Contact: React.FC<IProps> = ({ data }) => {
     }
   }, [offset]);
 
+  /* Teste contact git debug */
   return (
     <div className="flex flex-col items-center ">
       <Navbar></Navbar>
