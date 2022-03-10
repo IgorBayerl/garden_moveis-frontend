@@ -34,6 +34,8 @@ export const getStaticProps = async () => {
           description
           pictures {
             url
+            height
+            width
           }
           categories {
             id
@@ -103,6 +105,8 @@ const Home: React.FC<IProps> = ({ data }) => {
               description
               pictures {
                 url
+                height
+                width
               }
               categories {
                 id

@@ -1,6 +1,7 @@
 import Category from "./Category";
 import { IProduct, ICategory } from "../interfaces/data";
 import Link from "next/link";
+import Image from "next/image";
 import { useCallback, useContext, useEffect, useState } from "react";
 import { GlobalDataContext } from "./Context";
 interface IProps {
@@ -20,7 +21,18 @@ const Card: React.FC<IProps> = ({ item }) => {
       <Link href={`/product/${item.id}`}>
         <a>
           <div className="cursor-pointer max-w-sm rounded-2xl overflow-hidden ">
-            <img
+            <Image
+              className="w-full img-card sm:img-card-hover"
+              src={item.pictures[0].url}
+              alt={`Imagem do produto: ${item.title}`}
+              width={item.pictures[0].width}
+              height={item.pictures[0].height}
+              onError={({ currentTarget }) => {
+                currentTarget.onerror = null; // prevents looping
+                currentTarget.src = "/no-image.png";
+              }}
+            />
+            {/* <img
               className="w-full img-card sm:img-card-hover"
               src={item.pictures[0].url}
               alt={`Imagem do produto: ${item.title}`}
@@ -28,7 +40,7 @@ const Card: React.FC<IProps> = ({ item }) => {
                 currentTarget.onerror = null; // prevents looping
                 currentTarget.src = "/no-image.png";
               }}
-            />
+            /> */}
           </div>
         </a>
       </Link>

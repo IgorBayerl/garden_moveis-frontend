@@ -29,4 +29,6 @@ export interface ICategory {
 export interface IPictures {
   id: string;
   url: string;
+  height: number;
+  width: number;
 }
