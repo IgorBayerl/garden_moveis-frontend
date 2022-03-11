@@ -1,14 +1,22 @@
-import { useEffect, useRef, useState } from "react";
+import { createElement, useEffect, useRef, useState } from "react";
 import BottomMenu from "../components/BottomMenu";
 import Content from "../components/Content";
 import Navbar from "../components/NavBar";
 import { FiInstagram, FiMail, FiMapPin, FiPhone } from "react-icons/fi";
-import * as RIconIM from "react-icons/im";
+import * as RIconFA from "react-icons/fa";
 import Link from "next/link";
 import Map, { Marker } from "react-map-gl";
 import Footer from "../components/Footer";
 import { gql, GraphQLClient } from "graphql-request";
 import emailjs from "@emailjs/browser";
+
+const FontAwesome: any = {
+  FaPhone: RIconFA.FaPhone,
+  FaInstagram: RIconFA.FaInstagram,
+  FaMapMarkedAlt: RIconFA.FaMapMarkedAlt,
+  FaEnvelope: RIconFA.FaEnvelope,
+  FaWhatsapp: RIconFA.FaWhatsapp,
+};
 
 export const getStaticProps = async () => {
   const url = `${process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT}`;
@@ -188,7 +196,14 @@ const Contact: React.FC<IProps> = ({ data }) => {
               <Link href={link.url}>
                 <a className="text-xl transition02 hover:bg-cinza-clarin rounded-full lg:text-2xl  my-2 text-icon-align">
                   <div className="bg-verde-1  contact-icon sm:p-5 p-4 rounded-full">
-                    <RIconIM.ImWhatsapp />
+                    {FontAwesome[link.icon] != undefined ? (
+                      createElement(FontAwesome[link.icon], {
+                        key: link.icon,
+                        block: link.icon,
+                      })
+                    ) : (
+                      <RIconFA.FaPlusCircle />
+                    )}
                   </div>
 
                   {link.title}
