@@ -92,8 +92,6 @@ const Contact: React.FC<IProps> = ({ data }) => {
     }
   }, [offset]);
 
-  const formumario = useRef();
-
   const sendEmail = (e: any) => {
     e.preventDefault();
 
@@ -133,7 +131,6 @@ const Contact: React.FC<IProps> = ({ data }) => {
         </div>
         <div className="md:parent ">
           <form
-            ref={formumario}
             onSubmit={sendEmail}
             className="bg-white div1 flex justify-between flex-col p-5 rounded-md"
           >
