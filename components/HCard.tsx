@@ -25,7 +25,7 @@ const HCard: React.FC<IProps> = ({ item }) => {
         <div className="px-2 py-2 min-w-[10rem] font-bold sm:text-lg text-sm ">
           {item?.title}
         </div>
-        <div className=" flex flex-col pb-2">
+        <div className="flex flex-col  pb-2 justify-start ">
           {item?.categories?.map((item: ICategory) => (
             <NoActionCategory key={item.id}>{item.title}</NoActionCategory>
           ))}
