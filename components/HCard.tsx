@@ -12,7 +12,7 @@ const HCard: React.FC<IProps> = ({ item }) => {
     <>
       <Link href={`/product/${item.id}`}>
         <img
-          className="bg-blue-400 cursor-pointer rounded-2xl sm:img-hcard-hover hCard-img"
+          className=" cursor-pointer rounded-2xl sm:img-hcard-hover hCard-img"
           src={item.pictures[0].url}
           alt={`Imagem do produto: ${item.title}`}
           onError={({ currentTarget }) => {
