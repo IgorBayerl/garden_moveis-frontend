@@ -5,6 +5,7 @@ import { GlobalDataContext } from "./Context";
 import { HiMail } from "react-icons/hi";
 import { FiMail } from "react-icons/fi";
 
+//Mkae
 const Navbar: React.FC = () => {
   const { globalCategoriesData } = useContext(GlobalDataContext);
   return (
@@ -18,6 +19,14 @@ const Navbar: React.FC = () => {
               <h1 className="sm:text-3xl text-2xl mx-5 font-bold whitespace-nowrap">
                 Garden Moveis
               </h1>
+            </a>
+          </Link>
+        </div>
+        <div className="hidden sm:flex  align-middle  ">
+          <Link href="/contact">
+            <a className="flex text-xl px-3  text-icon-align text-icon-align-btn">
+              <FiMail />
+              Feito por Igor Bayerl
             </a>
           </Link>
         </div>
