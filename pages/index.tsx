@@ -13,6 +13,7 @@ import { GlobalDataContext } from "../components/Context";
 import { ICategory } from "./../interfaces/data";
 import Masonry from "../components/Masonry";
 import Footer from "../components/Footer";
+import Content from "../components/Content";
 
 interface IProps {
   data: IProduct;
@@ -235,11 +236,9 @@ const Home: React.FC<IProps> = ({ data }) => {
           scrollDirection={scrollDirection}
         ></BottomMenu>
         <TagsList scrollDirection={scrollDirection}></TagsList>
-        <MainContent>
+        <Content>
           <Masonry items={productsData}></Masonry>
-        </MainContent>
-
-        <Footer />
+        </Content>
       </div>
     </GlobalDataContext.Provider>
   );
