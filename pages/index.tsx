@@ -52,6 +52,7 @@ export const getStaticProps = async () => {
     }
   `;
   const rawData = await graphQLClient.request(query);
+
   const data = {
     products: rawData.productsOrders[0].products,
     categories: rawData.categoryOrders[0].categories,
@@ -227,7 +228,7 @@ const Home: React.FC<IProps> = ({ data }) => {
     <GlobalDataContext.Provider
       value={{ globalCategoriesData, toggleCategoryFilter }}
     >
-      <div className="flex flex-col items-center ">
+      <div className="flex flex-col items-center h-screen">
         <Navbar></Navbar>
         <BottomMenu
           currentPage="home"
@@ -238,7 +239,7 @@ const Home: React.FC<IProps> = ({ data }) => {
           <Masonry items={productsData}></Masonry>
         </MainContent>
 
-        {/* <Footer /> */}
+        <Footer />
       </div>
     </GlobalDataContext.Provider>
   );

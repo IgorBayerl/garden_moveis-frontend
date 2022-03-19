@@ -309,4 +309,8 @@
   .hCarddiv3 {
     grid-area: 2 / 2 / 3 / 3;
   }
+
+  .footerContainer {
+    margin-top: auto;
+  }
 }

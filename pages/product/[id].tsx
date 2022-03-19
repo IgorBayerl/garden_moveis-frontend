@@ -251,36 +251,38 @@ const Product: React.FC<IProps> = ({ data }) => {
             )}
           </Right>
         </ProductInformation>
-        {data.product.colection ? (
-          <ProductsLine title={"Coleção"}>
-            {/* {JSON.stringify(data.product.colection)} */}
-            {data.product.colection.products.map((item: any) => (
-              <HCard key={item.id} item={item} />
-            ))}
-          </ProductsLine>
-        ) : (
-          <></>
-        )}
-        {data.product.colection ? (
-          <ProductsLine title={"Categoria 1"}>
-            {/* {JSON.stringify(data.product.colection)} */}
-            {data.product.colection.products.map((item: any) => (
-              <HCard key={item.id} item={item} />
-            ))}
-          </ProductsLine>
-        ) : (
-          <></>
-        )}
-        {data.product.colection ? (
-          <ProductsLine title={"Categoria 2"}>
-            {/* {JSON.stringify(data.product.colection)} */}
-            {data.product.colection.products.map((item: any) => (
-              <HCard key={item.id} item={item} />
-            ))}
-          </ProductsLine>
-        ) : (
-          <></>
-        )}
+        <div className="h-fit">
+          {data.product.colection ? (
+            <ProductsLine title={"Coleção"}>
+              {/* {JSON.stringify(data.product.colection)} */}
+              {data.product.colection.products.map((item: any) => (
+                <HCard key={item.id} item={item} />
+              ))}
+            </ProductsLine>
+          ) : (
+            <></>
+          )}
+          {data.product.colection ? (
+            <ProductsLine title={"Categoria 1"}>
+              {/* {JSON.stringify(data.product.colection)} */}
+              {data.product.colection.products.map((item: any) => (
+                <HCard key={item.id} item={item} />
+              ))}
+            </ProductsLine>
+          ) : (
+            <></>
+          )}
+          {data.product.colection ? (
+            <ProductsLine title={"Categoria 2"}>
+              {/* {JSON.stringify(data.product.colection)} */}
+              {data.product.colection.products.map((item: any) => (
+                <HCard key={item.id} item={item} />
+              ))}
+            </ProductsLine>
+          ) : (
+            <></>
+          )}
+        </div>
       </Content>
 
       {/* <h1>Product page</h1>
@@ -291,7 +293,7 @@ const Product: React.FC<IProps> = ({ data }) => {
 
       <p>{JSON.stringify(data.product.pictures)}</p>
       <p>{JSON.stringify(data.product.categories)}</p>
-      <p>{JSON.stringify(data.product.relatedProducts)}</p> */}
+    <p>{JSON.stringify(data.product.relatedProducts)}</p> */}
     </div>
   );
 };

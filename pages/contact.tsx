@@ -80,7 +80,6 @@ const Contact: React.FC<IProps> = ({ data }) => {
   const [offset, setOffset] = useState(0);
 
   useEffect(() => {
-    console.log(data);
     const onScroll = () => setOffset(window.pageYOffset);
     // clean up code
     window.removeEventListener("scroll", onScroll);
@@ -125,7 +124,7 @@ const Contact: React.FC<IProps> = ({ data }) => {
 
   /* Teste contact git debug */
   return (
-    <div className="flex flex-col items-center ">
+    <div className="flex flex-col items-center h-screen ">
       <Navbar></Navbar>
       <BottomMenu
         currentPage="contact"

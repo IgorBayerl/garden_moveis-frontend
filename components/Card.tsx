@@ -11,10 +11,15 @@ interface IProps {
 const Card: React.FC<IProps> = ({ item }) => {
   const { globalCategoriesData } = useContext(GlobalDataContext);
 
-  const isSelected = useCallback((id: string) => {
-    return globalCategoriesData.find((item: ICategory) => item.id === id)
-      .selected;
-  }, []);
+  const isSelected = useCallback(
+    (id: string) => {
+      if (globalCategoriesData.find((item: ICategory) => item.id === id)) {
+        return globalCategoriesData.find((item: ICategory) => item.id === id)
+          .selected;
+      }
+    },
+    [globalCategoriesData]
+  );
 
   return (
     <div className=" max-w-sm py-2 break-inside-avoid masonry-content">
