@@ -60,7 +60,7 @@ export const getStaticProps = async () => {
   };
   return {
     props: { data },
-    revalidate: 120,
+    revalidate: 60 * 60 * 2, // tempo em segundos
   };
 };
 
