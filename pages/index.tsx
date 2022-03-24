@@ -19,7 +19,7 @@ interface IProps {
   data: IProduct;
 }
 
-// algum componente de imagem da erro quando o produto não retorna as URLs de imagem
+
 export const getStaticProps = async () => {
   const url = `${process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT}`;
   const graphQLClient = new GraphQLClient(url, {
