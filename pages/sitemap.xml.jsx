@@ -1,5 +1,3 @@
-import * as fs from "fs";
-
 const Sitemap = () => {
   return null;
 };
@@ -7,14 +5,11 @@ const Sitemap = () => {
 export const getServerSideProps = async ({ res }) => {
   const BASE_URL = "http://localhost:3000";
 
-  const staticPaths = fs
-    .readdirSync("pages")
-    .filter((staticPage) => {
-      return !["_app.js", "sitemap.xml.js"].includes(staticPage);
-    })
-    .map((staticPagePath) => {
+  const staticPaths = ["contact", "index", "sitemap.xml"].map(
+    (staticPagePath) => {
       return `${BASE_URL}/${staticPagePath}`;
-    });
+    }
+  );
 
   const allPaths = [...staticPaths];
 
