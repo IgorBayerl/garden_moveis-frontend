@@ -23,6 +23,7 @@ import NoActionCategory from "../../components/NoActionCategory";
 import ProductsLine from "../../components/ProductsLine";
 import HCard from "../../components/HCard";
 import Footer from "../../components/Footer";
+import NewHCard from "../../components/NewHCard";
 
 export const getStaticPaths = async () => {
   const url = `${process.env.NEXT_PUBLIC_GRAPHQL_ENDPOINT}`;
@@ -256,7 +257,7 @@ const Product: React.FC<IProps> = ({ data }) => {
             <ProductsLine title={"Coleção"}>
               {/* {JSON.stringify(data.product.colection)} */}
               {data.product.colection.products.map((item: any) => (
-                <HCard key={item.id} item={item} />
+                <NewHCard key={item.id} item={item} />
               ))}
             </ProductsLine>
           ) : (
@@ -266,7 +267,7 @@ const Product: React.FC<IProps> = ({ data }) => {
             <ProductsLine title={"Categoria 1"}>
               {/* {JSON.stringify(data.product.colection)} */}
               {data.product.colection.products.map((item: any) => (
-                <HCard key={item.id} item={item} />
+                <NewHCard key={item.id} item={item} />
               ))}
             </ProductsLine>
           ) : (
@@ -276,7 +277,7 @@ const Product: React.FC<IProps> = ({ data }) => {
             <ProductsLine title={"Categoria 2"}>
               {/* {JSON.stringify(data.product.colection)} */}
               {data.product.colection.products.map((item: any) => (
-                <HCard key={item.id} item={item} />
+                <NewHCard key={item.id} item={item} />
               ))}
             </ProductsLine>
           ) : (
