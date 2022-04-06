@@ -252,6 +252,7 @@ const Product: React.FC<IProps> = ({ data }) => {
             )}
           </Right>
         </ProductInformation>
+        {/* fazer altura e largura fixa para cards  */}
         <div className="h-fit">
           {data.product.colection ? (
             <ProductsLine title={"Coleção"}>
