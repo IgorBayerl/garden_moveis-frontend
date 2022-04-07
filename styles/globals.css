@@ -326,7 +326,7 @@
     min-width: 250px;
     max-width: 500px;
     width: 90vw;
-    height: auto;
+    height: 20em;
     display: flex;
     flex-direction: column;
     justify-content: space-between;

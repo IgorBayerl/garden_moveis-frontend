@@ -11,17 +11,7 @@ const NewHCard: React.FC<IProps> = ({ item }) => {
   return (
     <Link href={`/product/${item.id}`}>
       <div className=" h-full new-hcard-container bordinha-cinza mx-3 cursor-pointer">
-        <div className="flex h-[70%] justify-center align-middle">
-          <img
-            className=" img-new-hcard "
-            src={item.pictures[0].url}
-            alt={`Imagem do produto: ${item.title}`}
-            onError={({ currentTarget }) => {
-              currentTarget.onerror = null; //prevents looping
-              currentTarget.src = "/no-image.png";
-            }}
-          />
-        </div>
+        <div className="flex h-[70%] justify-center align-middle"></div>
         <div className=" pl-2 h-[30%] border-t-2 pt-2">
           <div className="mx-1">{item?.title}</div>
           <br />
