@@ -253,38 +253,6 @@ const Product: React.FC<IProps> = ({ data }) => {
           </Right>
         </ProductInformation>
         {/* fazer altura e largura fixa para cards  */}
-        <div className="h-fit">
-          {data.product.colection ? (
-            <ProductsLine title={"Coleção"}>
-              {/* {JSON.stringify(data.product.colection)} */}
-              {data.product.colection.products.map((item: any) => (
-                <NewHCard key={item.id} item={item} />
-              ))}
-            </ProductsLine>
-          ) : (
-            <></>
-          )}
-          {data.product.colection ? (
-            <ProductsLine title={"Categoria 1"}>
-              {/* {JSON.stringify(data.product.colection)} */}
-              {data.product.colection.products.map((item: any) => (
-                <NewHCard key={item.id} item={item} />
-              ))}
-            </ProductsLine>
-          ) : (
-            <></>
-          )}
-          {data.product.colection ? (
-            <ProductsLine title={"Categoria 2"}>
-              {/* {JSON.stringify(data.product.colection)} */}
-              {data.product.colection.products.map((item: any) => (
-                <NewHCard key={item.id} item={item} />
-              ))}
-            </ProductsLine>
-          ) : (
-            <></>
-          )}
-        </div>
       </Content>
 
       {/* <h1>Product page</h1>
