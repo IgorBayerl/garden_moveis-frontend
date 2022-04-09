@@ -25,30 +25,3 @@ const NewHCard: React.FC<IProps> = ({ item }) => {
 };
 
 export default NewHCard;
-
-/*
-<>
-    <Link href={`/product/${item.id}`}>
-    <img
-        className=" cursor-pointer rounded-2xl sm:img-hcard-hover hCard-img"
-        src={item.pictures[0].url}
-        alt={`Imagem do produto: ${item.title}`}
-        onError={({ currentTarget }) => {
-        currentTarget.onerror = null; //prevents looping
-        currentTarget.src = "/no-image.png";
-        }}
-    />
-    </Link>
-    <div className="">
-    <div className="px-2 py-2 min-w-[10rem] font-bold sm:text-lg text-sm ">
-        {item?.title}
-    </div>
-    <div className="flex flex-col  pb-2 justify-start ">
-        {item?.categories?.map((item: ICategory) => (
-        <NoActionCategory key={item.id}>{item.title}</NoActionCategory>
-        ))}
-    </div>
-    </div>
-    <div className="v-spacer" />
-</>
-*/
