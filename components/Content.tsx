@@ -7,7 +7,7 @@ interface IProps {
 const Content: React.FC<IProps> = ({ children }) => {
   return (
     <>
-      <div className="w-full  px-2 max-w-[1400px]">{children}</div>
+      <div className="w-full mb-5 px-2 max-w-[1400px]">{children}</div>
       <Footer></Footer>
     </>
   );
